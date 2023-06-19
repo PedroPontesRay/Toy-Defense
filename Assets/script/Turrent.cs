@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Turrent : MonoBehaviour
 {
-
+    public static Turrent TurrentInstance;
 
     [Header("Fire Atributes")]
-    private Transform target;
+    public Transform target;
     private string enemytag = "Enemy";
     public GameObject partRotate;
 
@@ -21,6 +21,12 @@ public class Turrent : MonoBehaviour
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+
+        if(TurrentInstance != null)
+        {
+            return;
+        }
+        TurrentInstance = this;
     }
 
     //update com menos atualizações

@@ -142,11 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72ceb8fddfdd9b41bdce3333e569659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   partRotate: {fileID: 2997847602456683502}
   firePoint: {fileID: 2997847601364565484}
   projectilePrefab: {fileID: 6032122379382335985, guid: 131485e15cb2a1342b268bdecbce436e, type: 3}
-  attackRange: 2.04
-  attackInterval: 20
+  attackRange: 4.8
+  attackInterval: 1
 --- !u!1 &2997847602169671673
 GameObject:
   m_ObjectHideFlags: 0

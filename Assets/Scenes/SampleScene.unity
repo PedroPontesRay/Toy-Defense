@@ -3570,7 +3570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standartTurrentPrefab: {fileID: 2997847602132156415, guid: 9a2ae25f5508a8b46b3d2779d91a6fe5, type: 3}
-  misselTurrentPrefab: {fileID: 0}
+  misselTurrentPrefab: {fileID: 2997847602132156415, guid: a15ac54f66ebbeb4abbfda7b22da2741, type: 3}
 --- !u!1 &1016374796
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,15 +62,21 @@ public class enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Shoot"))
+        if (other.CompareTag("StandartShoot"))
         {
-            TakeDamage();
+            TakeDamage(MainScript.damageAmountStandarBullet);
+            Debug.Log("Bala acertada");
+        }
+        else if(other.CompareTag("MisselShoot"))
+        {
+            TakeDamage(MainScript.damageAmountMissel);
+            Debug.Log("Missel Acertado");
         }
     }
 
-    private void TakeDamage()
+    private void TakeDamage(int damageInBulllet)
     {
-        currentLife -= MainScript.damageAmount;
+        currentLife -= damageInBulllet;
         if(currentLife <= 0)
         {
             Die();

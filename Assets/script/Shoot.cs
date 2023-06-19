@@ -4,22 +4,46 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-    private float speedProjectile = 20f;
-    private int damageAmoutInbullet;
-    // Start is called before the first frame update
+    [SerializeField] private float speedProjectile = 20f;
+    [SerializeField] private string typeShoot;
+
+    private float timeToDestroy;
+    Turrent turrentInstance;
+
+
     void Start()
     {
-        damageAmoutInbullet = MainScript.damageAmount;       
-        
-        Destroy(gameObject,0.5f);
+        turrentInstance = Turrent.TurrentInstance;
+        Type();
+
+        Destroy(gameObject, timeToDestroy);
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * speedProjectile * Time.deltaTime);
+        Type();
+        
+        
     }
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
     }
+
+    private void Type()
+    {
+        if(typeShoot == "missel")
+        {
+            timeToDestroy = 3f;
+            transform.LookAt(turrentInstance.target);
+            transform.Translate(Vector3.forward * speedProjectile * Time.deltaTime);
+            
+        }
+        else if(typeShoot == "bullet")
+        {
+            timeToDestroy = 0.5f;
+            transform.Translate(Vector3.forward * speedProjectile * Time.deltaTime);
+        }
+    }
+
 }

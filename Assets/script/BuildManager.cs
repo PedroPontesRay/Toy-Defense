@@ -5,9 +5,8 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
-    public static int sla;
 
-    private GameObject turrentSelect;
+
 
     void Awake()
     {

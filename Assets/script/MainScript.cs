@@ -5,8 +5,8 @@ using UnityEngine;
 public class MainScript : MonoBehaviour
 {
 
-    public static int damageAmount = 1;
-    
+    public static int damageAmountStandarBullet = 1;
+    public static int damageAmountMissel = 20;
 
 
 
