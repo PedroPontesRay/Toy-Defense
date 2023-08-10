@@ -14,36 +14,13 @@ public class Shoot : MonoBehaviour
     void Start()
     {
         turrentInstance = Turrent.TurrentInstance;
-        Type();
 
         Destroy(gameObject, timeToDestroy);
     }
 
-    private void Update()
+    public void Update()
     {
-        Type();
-        
-        
+        timeToDestroy = 0.5f;
+        transform.Translate(Vector3.forward * speedProjectile * Time.deltaTime);
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(gameObject);
-    }
-
-    private void Type()
-    {
-        if(typeShoot == "missel")
-        {
-            timeToDestroy = 3f;
-            transform.LookAt(turrentInstance.target);
-            transform.Translate(Vector3.forward * speedProjectile * Time.deltaTime);
-            
-        }
-        else if(typeShoot == "bullet")
-        {
-            timeToDestroy = 0.5f;
-            transform.Translate(Vector3.forward * speedProjectile * Time.deltaTime);
-        }
-    }
-
 }

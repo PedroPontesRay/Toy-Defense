@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,29 +15,42 @@ public class enemy : MonoBehaviour
     [Header("Life")]
     public int maxLive;
     private int currentLife;
+     List<GameObject> listOfItensInScene = new List<GameObject>();
 
     private void Start()
     {
         currentLife = maxLive;
 
 
-        List<GameObject> listOfItensInScene = new List<GameObject>();
 
         GameObject[] taggedItems = GameObject.FindGameObjectsWithTag("Waypoint");
         listOfItensInScene.AddRange(taggedItems);
 
-        waypoint = listOfItensInScene.ToArray();
+        List<GameObject> listOfItensInSceneOrdered = OrderItemsByName(listOfItensInScene);
 
-        /*
+        waypoint = listOfItensInSceneOrdered.ToArray();
+
+        
         // Debug para printar que a ordem esta correta
-        for (int i = 0; i < waypoint.Length; i++)
+        /*for (int i = 0; i < waypoint.Length; i++)
         {
             Debug.Log("Item " + i + ": " + waypoint[i].name);
+        }
+        
+        foreach(GameObject item in waypoint)
+        {
+            Debug.Log(item.name);
         }*/
 
 
 
         StartCoroutine(MoveToPoint());
+    }
+
+    private List<GameObject> OrderItemsByName(List<GameObject> unsorted)
+    {
+        List<GameObject> ordered = unsorted.OrderBy(item => item.name).ToList();
+        return ordered;
     }
 
     
@@ -64,6 +79,7 @@ public class enemy : MonoBehaviour
     {
         if (other.CompareTag("StandartShoot"))
         {
+            other.gameObject.SetActive(false);
             TakeDamage(MainScript.damageAmountStandarBullet);
             Debug.Log("Bala acertada");
         }

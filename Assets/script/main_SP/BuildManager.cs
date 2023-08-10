@@ -6,8 +6,6 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
 
-
-
     void Awake()
     {
         if (instance != null)
@@ -32,4 +30,9 @@ public class BuildManager : MonoBehaviour
     {
         turrentToBuild = turrent;
     }
+
+    /*public GameObject SelectedObject()
+    {
+        return ;
+    }*/
 }

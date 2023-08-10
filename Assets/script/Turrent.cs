@@ -18,8 +18,13 @@ public class Turrent : MonoBehaviour
     public float attackInterval;
     private float fireCountDown = 0f;
 
+    private PoolingObj shootPooling;
+
+
     void Start()
     {
+        shootPooling = GetComponent<PoolingObj>();
+
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
 
         if(TurrentInstance != null)
@@ -60,7 +65,7 @@ public class Turrent : MonoBehaviour
     private void Update()
     {
         
-        if (target== null) 
+        if (target == null) 
             return;
 
         partRotate.transform.LookAt(target);
@@ -78,8 +83,15 @@ public class Turrent : MonoBehaviour
 
     private void Firefunc()
     {    
-        Instantiate(projectilePrefab,firePoint.transform.position,firePoint.transform.rotation);
-        //Debug.Log("Fire");
+        GameObject shoot = shootPooling.GetPoolingObject();
+        if(shoot == null)
+        {
+            shootPooling.CreatingObject();
+            return;
+        }
+        shoot.transform.rotation = firePoint.rotation; 
+        shoot.transform.position = firePoint.position;
+        shoot.SetActive(true);
     }
 
     private void OnDrawGizmosSelected()
