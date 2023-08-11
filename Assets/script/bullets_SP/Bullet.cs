@@ -7,19 +7,10 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speedProjectile;
     [SerializeField] private float timeToDestroy;
 
-    //Turrent turrentInstance;
-    public Rigidbody m_rigidbody;
-
     private void OnEnable()
     {
         MoveProject();
         Invoke("Deactivate",timeToDestroy);
-    }
-
-    void Start()
-    {
-        //turrentInstance = Turrent.TurrentInstance;
-        m_rigidbody = GetComponent<Rigidbody>();
     }
 
     public void Update()
@@ -29,13 +20,27 @@ public class Bullet : MonoBehaviour
 
     private void MoveProject()
     {
-        //transform.position += transform.forward * (Time.deltaTime * speedProjectile);
-        m_rigidbody.velocity = transform.forward* speedProjectile;
+        transform.position += transform.forward * (Time.deltaTime * speedProjectile);
     }
 
     private void Deactivate()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            enemy enemyIns = other.GetComponent<enemy>();
+            if (enemyIns != null)
+            {
+                enemyIns.TakeDamage(MainScript.damageAmountMissel);
+                Debug.Log("Bala acertada");
+            }
+            Deactivate();
+        }
+
     }
 
 }

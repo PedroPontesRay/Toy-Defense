@@ -79,9 +79,7 @@ public class enemy : MonoBehaviour
     {
         if (other.CompareTag("StandartShoot"))
         {
-            other.gameObject.SetActive(false);
-            TakeDamage(MainScript.damageAmountStandarBullet);
-            Debug.Log("Bala acertada");
+            
         }
         else if(other.CompareTag("MisselShoot"))
         {
@@ -90,7 +88,7 @@ public class enemy : MonoBehaviour
         }
     }
 
-    private void TakeDamage(int damageInBulllet)
+    public void TakeDamage(int damageInBulllet)
     {
         currentLife -= damageInBulllet;
         if(currentLife <= 0)

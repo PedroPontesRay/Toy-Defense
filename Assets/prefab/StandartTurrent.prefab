@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5934592420629238965, guid: 8070581e272055a4aa6218fd569bc2f6, type: 3}
-  amountToPool: 1
+  amountToPool: 2
 --- !u!1 &2997847602169671673
 GameObject:
   m_ObjectHideFlags: 0

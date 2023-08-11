@@ -89,9 +89,9 @@ public class Turrent : MonoBehaviour
             shootPooling.CreatingObject();
             return;
         }
+        shoot.SetActive(true);
         shoot.transform.rotation = firePoint.rotation; 
         shoot.transform.position = firePoint.position;
-        shoot.SetActive(true);
     }
 
     private void OnDrawGizmosSelected()
