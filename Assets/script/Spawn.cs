@@ -15,8 +15,8 @@ public class Spawn : MonoBehaviour
     [SerializeField] float inimigoAumentoVelocidade = 0.1f;
     [SerializeField] int inimigoAumentoVida = 5;
 
-    [Header("EnemySpawn Atributos")]
     private int atualOnda = 1;
+    [Header("EnemySpawn Atributos Não alterar")]
     [SerializeField] private int atualNumeroInimigos;
     [SerializeField] private float atualVelocidadeInimigo;
     [SerializeField] private int atualVidaInimigo;

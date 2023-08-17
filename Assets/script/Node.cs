@@ -9,7 +9,7 @@ public class Node : MonoBehaviour /*, IPointerDownHandler, IBeginDragHandler, IE
     [SerializeField]private Color normalColor;
     [SerializeField] private GameObject turrent;
     private Renderer rend;
-    private Vector3 positionOffset = new Vector3(0f,0.5f,0f);
+    private Vector3 positionOffset = new Vector3(0f,0.35f,0f);
 
     BuildManager buildManager;
 
@@ -59,6 +59,7 @@ public class Node : MonoBehaviour /*, IPointerDownHandler, IBeginDragHandler, IE
     {
         //Build a turrent
         GameObject turretToBuild = BuildManager.instance.GetTurrentToBuild();
+        //colocar a torre em uma posição Y boa para o node
         turrent = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, Quaternion.identity);
     }
 }

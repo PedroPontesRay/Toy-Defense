@@ -6,10 +6,11 @@ public class Turrent : MonoBehaviour
 {
     public static Turrent TurrentInstance;
 
-    [Header("Fire Atributes")]
-    public Transform target;
+    private Transform target;
     private string enemytag = "Enemy";
+    [Header("Rotate-Mesh")]
     public GameObject partRotate;
+    public Transform meshTurrentTrans;
 
     [Header("Fire Atributes")]
     public Transform firePoint;
@@ -37,10 +38,12 @@ public class Turrent : MonoBehaviour
     //update com menos atualizações
     void UpdateTarget()
     {
+        //add todos os inimigos da area em um array
         GameObject[] enemies= GameObject.FindGameObjectsWithTag(enemytag);
         float shortest = Mathf.Infinity;
         GameObject nearestEnemy= null;
 
+        //verifica a posição dos mesmos
         foreach(GameObject enemy in enemies)
         {
             float distanceEnemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -52,6 +55,7 @@ public class Turrent : MonoBehaviour
             }
         }
 
+        //define qual o mais perto
         if(nearestEnemy != null && shortest <= attackRange)
         {
             target = nearestEnemy.transform;
@@ -60,6 +64,7 @@ public class Turrent : MonoBehaviour
         {
             target = null;
         }
+        
     }
     
     private void Update()
@@ -69,6 +74,8 @@ public class Turrent : MonoBehaviour
             return;
 
         partRotate.transform.LookAt(target);
+        Vector3 rotationMesh = partRotate.transform.eulerAngles;
+        meshTurrentTrans.transform.rotation = Quaternion.Euler(0, rotationMesh.y, 0);
 
         if(fireCountDown <= 0f)
         {

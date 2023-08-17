@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class enemy : MonoBehaviour
 {
@@ -68,13 +70,14 @@ public class enemy : MonoBehaviour
                 distanceToTarget = Vector3.Distance(transform.position, targetPosition);
                 yield return null;
             }
-            currentWayPointIndex++; 
+            currentWayPointIndex++;
+            transform.LookAt(LookPoint());
 
         }
 
         Destroy(gameObject);
     }
-
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("StandartShoot"))
@@ -86,11 +89,12 @@ public class enemy : MonoBehaviour
             TakeDamage(MainScript.damageAmountMissel);
             Debug.Log("Missel Acertado");
         }
-    }
+    }*/
 
     public void TakeDamage(int damageInBulllet)
     {
         currentLife -= damageInBulllet;
+        //Debug.Log("Vida inimigo: " + currentLife);
         if(currentLife <= 0)
         {
             Die();
@@ -99,5 +103,14 @@ public class enemy : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    private Transform LookPoint()
+    {
+        if(waypoint.Length != currentWayPointIndex)
+        {
+            return waypoint[currentWayPointIndex].transform;
+        }
+        return null;
     }
 }

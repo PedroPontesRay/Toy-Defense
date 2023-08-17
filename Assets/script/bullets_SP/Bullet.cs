@@ -36,7 +36,8 @@ public class Bullet : MonoBehaviour
             if (enemyIns != null)
             {
                 enemyIns.TakeDamage(MainScript.damageAmountMissel);
-                Debug.Log("Bala acertada");
+                //Debug.Log("Dano dado: "+MainScript.damageAmountStandarBullet);
+                //Debug.Log("Bala acertada");
             }
             Deactivate();
         }
