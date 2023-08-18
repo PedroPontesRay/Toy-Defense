@@ -23,7 +23,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372890075834271879}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,6 +30,7 @@ Transform:
   m_Children:
   - {fileID: 4592379184294082954}
   m_Father: {fileID: 2997847602132156402}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2997847601364565485
 GameObject:
@@ -55,13 +55,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2997847601364565485}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: 0.42}
+  m_LocalPosition: {x: 0, y: -0.33, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2997847602456683501}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2997847602132156415
 GameObject:
@@ -89,7 +89,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2997847602132156415}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.826, y: 1.033, z: -9.26}
   m_LocalScale: {x: 0.32825, y: 0.32825, z: 0.32825}
@@ -98,6 +97,7 @@ Transform:
   - {fileID: 2997847602456683501}
   - {fileID: 8806584177344803459}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2997847602132156413
 BoxCollider:
@@ -136,7 +136,7 @@ MonoBehaviour:
   meshTurrentTrans: {fileID: 8806584177344803459}
   firePoint: {fileID: 2997847601364565484}
   projectilePrefab: {fileID: 5934592420629238965, guid: 8070581e272055a4aa6218fd569bc2f6, type: 3}
-  attackRange: 2.04
+  attackRange: 1.96
   attackInterval: 20
 --- !u!114 &-1293130243543559504
 MonoBehaviour:
@@ -175,7 +175,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2997847602456683502}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.028}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -183,6 +182,7 @@ Transform:
   m_Children:
   - {fileID: 2997847601364565484}
   m_Father: {fileID: 2997847602132156402}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4049248386405260897
 PrefabInstance:
@@ -194,15 +194,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 01cfe1647bb359845ad2f41bff8195ca, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.0594
+      value: 5.95
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01cfe1647bb359845ad2f41bff8195ca, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.0594
+      value: 5.95
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01cfe1647bb359845ad2f41bff8195ca, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.0594
+      value: 5.95
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01cfe1647bb359845ad2f41bff8195ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -244,6 +244,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 01cfe1647bb359845ad2f41bff8195ca, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -94436600799034547, guid: 01cfe1647bb359845ad2f41bff8195ca, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 10f9ddf1871722e4b999378216fc94e8, type: 2}
     - target: {fileID: 919132149155446097, guid: 01cfe1647bb359845ad2f41bff8195ca, type: 3}
       propertyPath: m_Name
       value: Gumball Machine

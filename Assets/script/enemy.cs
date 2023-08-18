@@ -47,6 +47,7 @@ public class enemy : MonoBehaviour
 
 
         StartCoroutine(MoveToPoint());
+        transform.LookAt(LookPoint());
     }
 
     private List<GameObject> OrderItemsByName(List<GameObject> unsorted)

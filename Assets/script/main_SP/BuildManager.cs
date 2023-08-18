@@ -30,9 +30,4 @@ public class BuildManager : MonoBehaviour
     {
         turrentToBuild = turrent;
     }
-
-    /*public GameObject SelectedObject()
-    {
-        return ;
-    }*/
 }
