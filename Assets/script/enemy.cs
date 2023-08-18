@@ -10,18 +10,26 @@ using UnityEngine.UIElements;
 public class enemy : MonoBehaviour
 {
     private GameObject[] waypoint;
+    [SerializeField] private GameObject cameraMain;
+    [SerializeField] private Canvas canvas;
     private int currentWayPointIndex = 0;
-    [SerializeField]
+
     public float speed;
 
     [Header("Life")]
     public int maxLive;
     private int currentLife;
-     List<GameObject> listOfItensInScene = new List<GameObject>();
+    List<GameObject> listOfItensInScene = new List<GameObject>();
+
+
 
     private void Start()
     {
+        //vida atual chegar a vida maxima
         currentLife = maxLive;
+
+        //Definição da camera e barra de vida
+        cameraMain = GameObject.Find("Main Camera");
 
 
 
@@ -32,7 +40,7 @@ public class enemy : MonoBehaviour
 
         waypoint = listOfItensInSceneOrdered.ToArray();
 
-        
+
         // Debug para printar que a ordem esta correta
         /*for (int i = 0; i < waypoint.Length; i++)
         {
@@ -46,6 +54,7 @@ public class enemy : MonoBehaviour
 
 
 
+
         StartCoroutine(MoveToPoint());
         transform.LookAt(LookPoint());
     }
@@ -56,28 +65,30 @@ public class enemy : MonoBehaviour
         return ordered;
     }
 
-    
+
     private IEnumerator MoveToPoint()
     {
-        while(currentWayPointIndex < waypoint.Length)
+        while (currentWayPointIndex < waypoint.Length)
         {
             Vector3 targetPosition = waypoint[currentWayPointIndex].transform.position;
             float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
 
-            while(distanceToTarget > 0.1f)
+            while (distanceToTarget > 0.1f)
             {
-                transform.position = Vector3.MoveTowards(transform.position,targetPosition,speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
                 distanceToTarget = Vector3.Distance(transform.position, targetPosition);
                 yield return null;
             }
             currentWayPointIndex++;
             transform.LookAt(LookPoint());
+            lookCamera();
 
         }
 
         Destroy(gameObject);
     }
+
     /*
     private void OnTriggerEnter(Collider other)
     {
@@ -96,11 +107,12 @@ public class enemy : MonoBehaviour
     {
         currentLife -= damageInBulllet;
         //Debug.Log("Vida inimigo: " + currentLife);
-        if(currentLife <= 0)
+        if (currentLife <= 0)
         {
             Die();
         }
     }
+
     private void Die()
     {
         Destroy(gameObject);
@@ -108,10 +120,19 @@ public class enemy : MonoBehaviour
 
     private Transform LookPoint()
     {
-        if(waypoint.Length != currentWayPointIndex)
+        if (waypoint.Length != currentWayPointIndex)
         {
             return waypoint[currentWayPointIndex].transform;
         }
         return null;
     }
+
+
+    private void lookCamera()
+    {
+        Debug.Log("Look camera");
+        Vector3 transformY = new Vector3(cameraMain.transform.rotation.x, cameraMain.transform.rotation.y, cameraMain.transform.rotation.z);  
+        canvas.transform.LookAt(transformY); 
+    }
+
 }

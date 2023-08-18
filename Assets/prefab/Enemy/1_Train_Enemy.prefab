@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5137109938359074826}
   - component: {fileID: 5121675932339845481}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: Bar-Life
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2937731591200380423}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.29883623, y: 0.64085644, z: 0.29883623, w: 0.64085644}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.001, y: 0.001, z: 1}
   m_ConstrainProportionsScale: 0
@@ -110,7 +110,7 @@ RectTransform:
   - {fileID: 7854521738063908774}
   m_Father: {fileID: 8996812778358335091}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -50, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.599}
@@ -304,6 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333cf9197df9dbe4ebfcc637beddd65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraMain: {fileID: 0}
+  canvas: {fileID: 3337782407839962505}
   speed: 2
   maxLive: 100
 --- !u!54 &2060355895030340453
@@ -348,12 +350,12 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.2807081
+  m_Center: {x: -0.018128425, y: 0, z: 0}
 --- !u!1001 &262473193433321905
 PrefabInstance:
   m_ObjectHideFlags: 0

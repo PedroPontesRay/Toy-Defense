@@ -37,7 +37,7 @@ public class Spawn : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Onda: " + atualOnda);
+            //Debug.Log("Onda: " + atualOnda);
             yield return new WaitForSeconds(tempoEntreWaves);
 
 
@@ -72,7 +72,7 @@ public class Spawn : MonoBehaviour
         enemy.GetComponent<enemy>().speed = atualVelocidadeInimigo;
         enemy.GetComponent<enemy>().maxLive = atualVidaInimigo;
         enemyCurrent--;
-        Debug.Log(enemyCurrent);
+        //Debug.Log(enemyCurrent);
     }
 
 
@@ -99,7 +99,6 @@ public class Spawn : MonoBehaviour
         }
         else if (enemyCurrent == 1)
         {
-            Debug.Log("terceira");
             return thirdTrainPrefab;
         }
         else if(enemyCurrent < atualNumeroInimigos)
@@ -108,4 +107,7 @@ public class Spawn : MonoBehaviour
         }
         return null;
     }
+
+
+
 }
