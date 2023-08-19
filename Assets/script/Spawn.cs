@@ -13,22 +13,23 @@ public class Spawn : MonoBehaviour
     [SerializeField] private GameObject spawnPosition;
 
     [Header("WaveTime Atributos")]
-    [SerializeField] float tempoEntreWaves = 5f;
-    [SerializeField] int contagemInimigos = 5;
-    [SerializeField] int aumentoPorOnda = 2;
-    [SerializeField] float inimigoAumentoVelocidade = 0.1f;
-    [SerializeField] int inimigoAumentoVida = 5;
+    [SerializeField] float tempoEntreWaves;
+    [SerializeField] int contagemInimigos;
+    [SerializeField] int aumentoPorOnda;
+    [SerializeField] float inimigoAumentoVelocidade;
+    [SerializeField] int inimigoAumentoVida;
 
     [Header("EnemySpawn Atributos Não alterar")]
     [SerializeField] private int atualNumeroInimigos;
     [SerializeField] private float atualVelocidadeInimigo;
     [SerializeField] private int atualVidaInimigo;
 
-    private int atualOnda = 1;
+    private int currentWave;
     private int enemyCurrent;
 
     private void Start()
     {
+        currentWave = 1;
         StartCoroutine(SpawnEnemies());
     }
 
@@ -37,14 +38,14 @@ public class Spawn : MonoBehaviour
     {
         while (true)
         {
-            //Debug.Log("Onda: " + atualOnda);
+            Debug.Log("Onda: " + currentWave);
             yield return new WaitForSeconds(tempoEntreWaves);
 
-
-            atualNumeroInimigos = contagemInimigos + (atualOnda - 1) * aumentoPorOnda;
+            atualNumeroInimigos = contagemInimigos + (currentWave - 1) * aumentoPorOnda;
             enemyCurrent =  atualNumeroInimigos;
-            atualVelocidadeInimigo = TrainChoose().GetComponent<enemy>().speed + (atualOnda - 1) * inimigoAumentoVelocidade;
-            atualVidaInimigo = TrainChoose().GetComponent<enemy>().maxLive + (atualOnda - 1) * inimigoAumentoVida;
+
+            atualVelocidadeInimigo = (TrainChoose().GetComponent<enemy>().currentSpeed + currentWave) * inimigoAumentoVelocidade;
+            atualVidaInimigo = (TrainChoose().GetComponent<enemy>().maxLife + currentWave) * inimigoAumentoVida;
 
             
 
@@ -57,30 +58,33 @@ public class Spawn : MonoBehaviour
                 SpawnEnemy();
             }
 
-            while(HaInimigos())
+            while(HasEnemys())
             {
+                //Pensar numa solução melhor de verificação de inimigos na cena
                 yield return null;
             }
 
-            atualOnda++;
+
+            currentWave++;
         }
     }
 
     private void SpawnEnemy()
     {
-        GameObject enemy = Instantiate(TrainChoose(), spawnPosition.transform.position, Quaternion.identity);
-        enemy.GetComponent<enemy>().speed = atualVelocidadeInimigo;
-        enemy.GetComponent<enemy>().maxLive = atualVidaInimigo;
+        GameObject enemyWhoGonnaSpawn = Instantiate(TrainChoose(), spawnPosition.transform.position, Quaternion.identity);
+        //Definindo variaveis da Onda Atual nos inimigos
+        enemyWhoGonnaSpawn.GetComponent<enemy>().currentSpeed = atualVelocidadeInimigo;
+        enemyWhoGonnaSpawn.GetComponent<enemy>().maxLife = atualVidaInimigo;
         enemyCurrent--;
         //Debug.Log(enemyCurrent);
     }
 
 
-    private bool HaInimigos()
+    private bool HasEnemys()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] enemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
 
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in enemiesInScene)
         {
             if(enemy != null)
             {

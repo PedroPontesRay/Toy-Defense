@@ -89,13 +89,15 @@ public class Turrent : MonoBehaviour
     
 
     private void Firefunc()
-    {    
+    {   
         GameObject shoot = shootPooling.GetPoolingObject();
         if(shoot == null)
         {
             shootPooling.CreatingObject();
             return;
         }
+
+        //ativar o tiro colocando e rotacionando ele na posição correta
         shoot.SetActive(true);
         shoot.transform.rotation = firePoint.rotation; 
         shoot.transform.position = firePoint.position;
