@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    [Header("Prefabs e objetos de cena")]
-    [SerializeField] private GameObject firstTrainPrefab;
-    [SerializeField] private GameObject secondTrainPrefab;
-    [SerializeField] private GameObject thirdTrainPrefab;
+    [Header("Prefabs")]
+    [SerializeField] private GameObject firstTrainPrefab, secondTrainPrefab, thirdTrainPrefab;
+
+    [Header("Objetos de cena")]
     [SerializeField] private GameObject spawnPosition;
 
     [Header("WaveTime Atributos")]
@@ -38,7 +38,7 @@ public class Spawn : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Onda: " + currentWave);
+            //Debug.Log("Onda: " + currentWave);
             yield return new WaitForSeconds(tempoEntreWaves);
 
             atualNumeroInimigos = contagemInimigos + (currentWave - 1) * aumentoPorOnda;
@@ -52,9 +52,7 @@ public class Spawn : MonoBehaviour
 
             for (int i = 0;i < atualNumeroInimigos;i++)
             {
-                yield return new WaitForSeconds(0.5f);
-                //Debug.Log("Spawnado");
-                
+                yield return new WaitForSeconds(0.5f);        
                 SpawnEnemy();
             }
 
@@ -76,7 +74,6 @@ public class Spawn : MonoBehaviour
         enemyWhoGonnaSpawn.GetComponent<enemy>().currentSpeed = atualVelocidadeInimigo;
         enemyWhoGonnaSpawn.GetComponent<enemy>().maxLife = atualVidaInimigo;
         enemyCurrent--;
-        //Debug.Log(enemyCurrent);
     }
 
 
@@ -94,8 +91,8 @@ public class Spawn : MonoBehaviour
         return false;
     }
 
-
-    private GameObject TrainChoose()
+    
+    public GameObject TrainChoose()
     {
         if (enemyCurrent == atualNumeroInimigos)
         {

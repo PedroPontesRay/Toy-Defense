@@ -18,6 +18,7 @@ public class Turrent : MonoBehaviour
     public float attackRange;
     public float attackInterval;
     private float fireCountDown = 0f;
+    [SerializeField] private float updateTargetTime;
 
     private PoolingObj shootPooling;
 
@@ -26,7 +27,7 @@ public class Turrent : MonoBehaviour
     {
         shootPooling = GetComponent<PoolingObj>();
 
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating("UpdateTarget", 0f, updateTargetTime);
 
         if(TurrentInstance != null)
         {

@@ -16,28 +16,25 @@ public class enemy : MonoBehaviour
 
     [Header("Life")]
     public int maxLife;
-    public float currentSpeed;
-    [SerializeField] private int currentLife;
+    //Health bar
+    [SerializeField] private GameObject _canvas;
+    [SerializeField] private Image _healthBarSprite;
+    [SerializeField] private Transform meshEnemyRotation;
+    private int currentLife;
 
 
     List<GameObject> listOfItensInScene = new List<GameObject>();
 
-    //Health bar
-    [SerializeField] private GameObject _canvas;
-    [SerializeField] private Image _healthBarSprite;
-    private GameObject _cam;
-    
+    public float currentSpeed;
+    private bool takenDamage;
+    private float slowSpeed = 0.6f;
 
-
+    private float timeInslow;
 
     private void Start()
     {
         //vida atual chegar a vida maxima
         currentLife = maxLife;
-
-        //Definição da camera e barra de vida
-        _cam = GameObject.Find("Main Camera");
-
 
 
         GameObject[] taggedItems = GameObject.FindGameObjectsWithTag("Waypoint");
@@ -63,7 +60,8 @@ public class enemy : MonoBehaviour
 
 
         StartCoroutine(MoveToPoint());
-        transform.LookAt(LookPoint());
+        meshEnemyRotation.transform.LookAt(LookPoint());
+        
     }
 
     private List<GameObject> OrderItemsByName(List<GameObject> unsorted)
@@ -82,30 +80,60 @@ public class enemy : MonoBehaviour
 
             while (distanceToTarget > 0.1f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+                //verificação para deixa o inimigo lento após tomar dano
+                if(takenDamage == true && timeInslow > 0) 
+                {
+                    Debug.Log("Reproduzinho Slow");
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, slowSpeed * Time.deltaTime);
+
+                    timeInslow -= Time.deltaTime; 
+                    //função para voltar a velocidade para normal depois de um tempo sem tomar dano
+                    
+                }
+                else
+                {
+                    Debug.Log("Reproduzinho Speed " + timeInslow + takenDamage);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+                    timeInslow = 1.0f;
+
+                }
+
 
                 distanceToTarget = Vector3.Distance(transform.position, targetPosition);
                 yield return null;
             }
             currentWayPointIndex++;
+            UpdateLookAt();
 
         }
 
-        UpdateLookAt();
 
         Die();
     }
-
     public void TakeDamage(int damageInBulllet)
     {
+        takenDamage = true;
         currentLife -= damageInBulllet;
-        UpdateHealthBar(maxLife,currentLife);
+        UpdateHealthBar(maxLife, currentLife);
 
         if (currentLife <= 0)
         {
             Die();
         }
+        Invoke("ReturnNormalSpeed", 1.0f);
     }
+    private void ReturnNormalSpeed()
+    {
+        timeInslow = 1.0f;
+
+        takenDamage= false;
+    }
+
+
+
+
+
+    
 
     private void Die()
     {
@@ -125,17 +153,15 @@ public class enemy : MonoBehaviour
     private void UpdateLookAt()
     {
         //Faz Objeto olhar para o próximo ponto
-        transform.LookAt(LookPoint());
-
-        //Faz canvas olhar para camera
-        _canvas.transform.LookAt(_cam.transform);
+        meshEnemyRotation.LookAt(LookPoint());
+        //_canvas.transform.LookAt(GameObject.Find("Main Camera").transform);
     }
-
-    
-
 
     private void UpdateHealthBar(int maxHealth,float currentHealth)
     {
         _healthBarSprite.fillAmount = currentHealth / maxHealth;
     }
+
+
+
 }
