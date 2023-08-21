@@ -14,8 +14,12 @@ public class enemy : MonoBehaviour
     private int currentWayPointIndex = 0;
 
 
-    [Header("Life")]
+    [Header("Values To change")]
     public int maxLife;
+    public float currentSpeed;
+    public float valueBricks;
+
+    [Header("Objects to reference")]
     //Health bar
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Image _healthBarSprite;
@@ -25,11 +29,12 @@ public class enemy : MonoBehaviour
 
     List<GameObject> listOfItensInScene = new List<GameObject>();
 
-    public float currentSpeed;
     private bool takenDamage;
     private float slowSpeed = 0.2f;
 
     private float timeInslow;
+
+
 
     private void Start()
     {

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using TMPro;
+
 using System;
 
 public class Spawn : MonoBehaviour
 {
     [Header("Prefabs")]
     [SerializeField] private GameObject firstTrainPrefab, secondTrainPrefab, thirdTrainPrefab;
-    [SerializeField] private TextMeshProUGUI waveTxt;
+
 
     [Header("Objetos de cena")]
     [SerializeField] private GameObject spawnPosition;
@@ -21,11 +21,14 @@ public class Spawn : MonoBehaviour
     [SerializeField] int aumentoPorOnda;
     [SerializeField] float inimigoAumentoVelocidade;
     [SerializeField] int inimigoAumentoVida;
+    [SerializeField] private float aumentoValorBricks;
 
     [Header("EnemySpawn Atributos Não alterar")]
     [SerializeField] private int atualNumeroInimigos;
     [SerializeField] private float atualVelocidadeInimigo;
     [SerializeField] private int atualVidaInimigo;
+    [SerializeField] private float atualValorBricks;
+
 
     private int currentWave;
     private int enemyCurrent;
@@ -50,7 +53,7 @@ public class Spawn : MonoBehaviour
 
             atualVelocidadeInimigo = (TrainChoose().GetComponent<enemy>().currentSpeed + currentWave) * inimigoAumentoVelocidade;
             atualVidaInimigo = (TrainChoose().GetComponent<enemy>().maxLife + currentWave) * inimigoAumentoVida;
-
+            atualValorBricks = (TrainChoose().GetComponent<enemy>().valueBricks + currentWave) * aumentoValorBricks;
             
 
 
@@ -78,6 +81,7 @@ public class Spawn : MonoBehaviour
         //Definindo variaveis da Onda Atual nos inimigos
         enemyWhoGonnaSpawn.GetComponent<enemy>().currentSpeed = atualVelocidadeInimigo;
         enemyWhoGonnaSpawn.GetComponent<enemy>().maxLife = atualVidaInimigo;
+        enemyWhoGonnaSpawn.GetComponent<enemy>().valueBricks = atualValorBricks;
         enemyCurrent--;
     }
 
