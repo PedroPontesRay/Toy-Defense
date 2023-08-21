@@ -18,6 +18,7 @@ public class Turrent : MonoBehaviour
     public float attackRange;
     public float attackInterval;
     private float fireCountDown = 0f;
+    [SerializeField] private float updateTargetTime;
 
     private PoolingObj shootPooling;
 
@@ -26,7 +27,7 @@ public class Turrent : MonoBehaviour
     {
         shootPooling = GetComponent<PoolingObj>();
 
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating("UpdateTarget", 0f, updateTargetTime);
 
         if(TurrentInstance != null)
         {
@@ -89,13 +90,15 @@ public class Turrent : MonoBehaviour
     
 
     private void Firefunc()
-    {    
+    {   
         GameObject shoot = shootPooling.GetPoolingObject();
         if(shoot == null)
         {
             shootPooling.CreatingObject();
             return;
         }
+
+        //ativar o tiro colocando e rotacionando ele na posição correta
         shoot.SetActive(true);
         shoot.transform.rotation = firePoint.rotation; 
         shoot.transform.position = firePoint.position;

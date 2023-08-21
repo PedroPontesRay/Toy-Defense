@@ -5,32 +5,36 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class enemy : MonoBehaviour
 {
     private GameObject[] waypoint;
-    [SerializeField] private GameObject cameraMain;
-    [SerializeField] private Canvas canvas;
+
     private int currentWayPointIndex = 0;
 
-    public float speed;
 
     [Header("Life")]
-    public int maxLive;
+    public int maxLife;
+    //Health bar
+    [SerializeField] private GameObject _canvas;
+    [SerializeField] private Image _healthBarSprite;
+    [SerializeField] private Transform meshEnemyRotation;
     private int currentLife;
+
+
     List<GameObject> listOfItensInScene = new List<GameObject>();
 
+    public float currentSpeed;
+    private bool takenDamage;
+    private float slowSpeed = 0.6f;
 
+    private float timeInslow;
 
     private void Start()
     {
         //vida atual chegar a vida maxima
-        currentLife = maxLive;
-
-        //Definição da camera e barra de vida
-        cameraMain = GameObject.Find("Main Camera");
-
+        currentLife = maxLife;
 
 
         GameObject[] taggedItems = GameObject.FindGameObjectsWithTag("Waypoint");
@@ -56,7 +60,8 @@ public class enemy : MonoBehaviour
 
 
         StartCoroutine(MoveToPoint());
-        transform.LookAt(LookPoint());
+        meshEnemyRotation.transform.LookAt(LookPoint());
+        
     }
 
     private List<GameObject> OrderItemsByName(List<GameObject> unsorted)
@@ -75,49 +80,67 @@ public class enemy : MonoBehaviour
 
             while (distanceToTarget > 0.1f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                //verificação para deixa o inimigo lento após tomar dano
+                if(takenDamage == true && timeInslow > 0) 
+                {
+                    Debug.Log("Reproduzinho Slow");
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, slowSpeed * Time.deltaTime);
+
+                    timeInslow -= Time.deltaTime; 
+                    //função para voltar a velocidade para normal depois de um tempo sem tomar dano
+                    
+                }
+                else
+                {
+                    Debug.Log("Reproduzinho Speed " + timeInslow + takenDamage);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+                    timeInslow = 1.0f;
+
+                }
+
 
                 distanceToTarget = Vector3.Distance(transform.position, targetPosition);
                 yield return null;
             }
             currentWayPointIndex++;
-            transform.LookAt(LookPoint());
-            lookCamera();
+            UpdateLookAt();
 
         }
 
-        Destroy(gameObject);
+
+        Die();
     }
-
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("StandartShoot"))
-        {
-            
-        }
-        else if(other.CompareTag("MisselShoot"))
-        {
-            TakeDamage(MainScript.damageAmountMissel);
-            Debug.Log("Missel Acertado");
-        }
-    }*/
-
     public void TakeDamage(int damageInBulllet)
     {
+        takenDamage = true;
         currentLife -= damageInBulllet;
-        //Debug.Log("Vida inimigo: " + currentLife);
+        UpdateHealthBar(maxLife, currentLife);
+
         if (currentLife <= 0)
         {
             Die();
         }
+        Invoke("ReturnNormalSpeed", 1.0f);
     }
+    private void ReturnNormalSpeed()
+    {
+        timeInslow = 1.0f;
+
+        takenDamage= false;
+    }
+
+
+
+
+
+    
 
     private void Die()
     {
         Destroy(gameObject);
     }
 
+    //retorna o transform que o inimigo tem que olhar
     private Transform LookPoint()
     {
         if (waypoint.Length != currentWayPointIndex)
@@ -127,12 +150,18 @@ public class enemy : MonoBehaviour
         return null;
     }
 
-
-    private void lookCamera()
+    private void UpdateLookAt()
     {
-        Debug.Log("Look camera");
-        Vector3 transformY = new Vector3(cameraMain.transform.rotation.x, cameraMain.transform.rotation.y, cameraMain.transform.rotation.z);  
-        canvas.transform.LookAt(transformY); 
+        //Faz Objeto olhar para o próximo ponto
+        meshEnemyRotation.LookAt(LookPoint());
+        //_canvas.transform.LookAt(GameObject.Find("Main Camera").transform);
     }
+
+    private void UpdateHealthBar(int maxHealth,float currentHealth)
+    {
+        _healthBarSprite.fillAmount = currentHealth / maxHealth;
+    }
+
+
 
 }
