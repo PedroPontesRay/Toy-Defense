@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class Spawn : MonoBehaviour
 {
     [Header("Prefabs")]
     [SerializeField] private GameObject firstTrainPrefab, secondTrainPrefab, thirdTrainPrefab;
+    [SerializeField] private TextMeshProUGUI waveTxt;
 
     [Header("Objetos de cena")]
     [SerializeField] private GameObject spawnPosition;
@@ -39,6 +42,7 @@ public class Spawn : MonoBehaviour
         while (true)
         {
             //Debug.Log("Onda: " + currentWave);
+            waveTxt.text = currentWave.ToString();
             yield return new WaitForSeconds(tempoEntreWaves);
 
             atualNumeroInimigos = contagemInimigos + (currentWave - 1) * aumentoPorOnda;
@@ -64,6 +68,7 @@ public class Spawn : MonoBehaviour
 
 
             currentWave++;
+            waveTxt.text = currentWave.ToString();
         }
     }
 

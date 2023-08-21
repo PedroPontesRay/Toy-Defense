@@ -27,7 +27,7 @@ public class enemy : MonoBehaviour
 
     public float currentSpeed;
     private bool takenDamage;
-    private float slowSpeed = 0.6f;
+    private float slowSpeed = 0.2f;
 
     private float timeInslow;
 
@@ -60,7 +60,6 @@ public class enemy : MonoBehaviour
 
 
         StartCoroutine(MoveToPoint());
-        meshEnemyRotation.transform.LookAt(LookPoint());
         
     }
 
@@ -83,16 +82,15 @@ public class enemy : MonoBehaviour
                 //verificação para deixa o inimigo lento após tomar dano
                 if(takenDamage == true && timeInslow > 0) 
                 {
-                    Debug.Log("Reproduzinho Slow");
+                    //função para voltar a velocidade para normal depois de um tempo sem tomar dano
                     transform.position = Vector3.MoveTowards(transform.position, targetPosition, slowSpeed * Time.deltaTime);
 
                     timeInslow -= Time.deltaTime; 
-                    //função para voltar a velocidade para normal depois de um tempo sem tomar dano
                     
                 }
                 else
                 {
-                    Debug.Log("Reproduzinho Speed " + timeInslow + takenDamage);
+
                     transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
                     timeInslow = 1.0f;
 
