@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MainScript : MonoBehaviour
 {
-    public static int damageAmountStandarBullet = 1;
-    public static int damageAmountMissel = 20;
+    public static int damageAmountStandarBullet;
+    public static int damageAmountMissel;
+    public static int moneyQnt;
+    public static int brickQnt;
 }
+
+

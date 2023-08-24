@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2997847601364565485}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.123000026, z: 1.1130013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2997847602456683501}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2997847602132156415
 GameObject:
@@ -58,7 +58,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2997847602132156415}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.826, y: 1.172, z: -9.26}
   m_LocalScale: {x: 0.32825, y: 0.32825, z: 0.32825}
@@ -66,6 +65,7 @@ Transform:
   m_Children:
   - {fileID: 2997847602456683501}
   m_Father: {fileID: 0}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2997847602132156403
 MeshFilter:
@@ -156,7 +156,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6032122379382335985, guid: 131485e15cb2a1342b268bdecbce436e, type: 3}
   attackRange: 4.8
   attackInterval: 1
-  updateTargetTime: 50
+  updateTargetTime: 20
 --- !u!1 &2997847602169671673
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,13 +183,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2997847602169671673}
-  serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0.030464558, y: 0.14318335, z: 0.42955005}
   m_LocalScale: {x: 0.67686224, y: 0.6768622, z: 0.6768622}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2997847602456683501}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &2997847602169671677
 MeshFilter:
@@ -287,7 +287,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2997847602456683502}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.028}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -296,4 +295,5 @@ Transform:
   - {fileID: 2997847602169671672}
   - {fileID: 2997847601364565484}
   m_Father: {fileID: 2997847602132156402}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

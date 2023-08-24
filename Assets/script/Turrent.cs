@@ -5,22 +5,24 @@ using UnityEngine;
 public class Turrent : MonoBehaviour
 {
     public static Turrent TurrentInstance;
+    private PoolingObj shootPooling;
 
     private Transform target;
     private string enemytag = "Enemy";
+
+
     [Header("Rotate-Mesh")]
     public GameObject partRotate;
     public Transform meshTurrentTrans;
 
     [Header("Fire Atributes")]
-    public Transform firePoint;
-    public GameObject projectilePrefab;
-    public float attackRange;
-    public float attackInterval;
-    private float fireCountDown = 0f;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float attackInterval;
+    [SerializeField] private float fireCountDown = 0f;
     [SerializeField] private float updateTargetTime;
 
-    private PoolingObj shootPooling;
 
 
     void Start()
@@ -29,11 +31,12 @@ public class Turrent : MonoBehaviour
 
         InvokeRepeating("UpdateTarget", 0f, updateTargetTime);
 
+        /*
         if(TurrentInstance != null)
         {
             return;
         }
-        TurrentInstance = this;
+        TurrentInstance = this;*/
     }
 
     //update com menos atualizações
@@ -91,6 +94,9 @@ public class Turrent : MonoBehaviour
 
     private void Firefunc()
     {   
+        if(target== null)
+            return;
+        
         GameObject shoot = shootPooling.GetPoolingObject();
         if(shoot == null)
         {
