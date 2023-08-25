@@ -1,32 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class enemy : MonoBehaviour
 {
     private GameObject[] waypoint;
 
     private int currentWayPointIndex = 0;
 
-<<<<<<< Updated upstream
 
     [Header("Life")]
     public int maxLife;
-=======
-    [Header("Values To change")]
-    public int maxLife;
-    public float currentSpeed;
-    public int valueBricks;
-
-    [Header("Objects to reference")]
->>>>>>> Stashed changes
     //Health bar
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Image _healthBarSprite;
     [SerializeField] private Transform meshEnemyRotation;
     private int currentLife;
+
 
     List<GameObject> listOfItensInScene = new List<GameObject>();
 
@@ -36,17 +31,10 @@ public class Enemy : MonoBehaviour
 
     private float timeInslow;
 
-<<<<<<< Updated upstream
-=======
-    public Interface_Manager interfaceManager;
-
->>>>>>> Stashed changes
     private void Start()
     {
         //vida atual chegar a vida maxima
         currentLife = maxLife;
-
-        interfaceManager = GameObject.FindAnyObjectByType<Interface_Manager>();
 
 
         GameObject[] taggedItems = GameObject.FindGameObjectsWithTag("Waypoint");
@@ -69,6 +57,8 @@ public class Enemy : MonoBehaviour
         }*/
 
 
+
+
         StartCoroutine(MoveToPoint());
         meshEnemyRotation.transform.LookAt(LookPoint());
         
@@ -79,6 +69,7 @@ public class Enemy : MonoBehaviour
         List<GameObject> ordered = unsorted.OrderBy(item => item.name).ToList();
         return ordered;
     }
+
 
     private IEnumerator MoveToPoint()
     {
@@ -117,9 +108,8 @@ public class Enemy : MonoBehaviour
         }
 
 
-        ReachThePoint();
+        Die();
     }
-
     public void TakeDamage(int damageInBulllet)
     {
         takenDamage = true;
@@ -132,28 +122,20 @@ public class Enemy : MonoBehaviour
         }
         Invoke("ReturnNormalSpeed", 1.0f);
     }
-
     private void ReturnNormalSpeed()
     {
-        if (!takenDamage)
-            return;
         timeInslow = 1.0f;
+
         takenDamage= false;
     }
 
+
+
+
+
+    
+
     private void Die()
-    {
-        //ADD points
-        Interface_Manager.instance.EnemyDied(valueBricks);
-
-        Destroy(gameObject);
-
-
-        //usar essa função quando o pooling de inimigos estiver pronto
-        //gameObject.SetActive(false);
-    }
-
-    private void ReachThePoint()
     {
         Destroy(gameObject);
     }
@@ -172,10 +154,14 @@ public class Enemy : MonoBehaviour
     {
         //Faz Objeto olhar para o próximo ponto
         meshEnemyRotation.LookAt(LookPoint());
+        //_canvas.transform.LookAt(GameObject.Find("Main Camera").transform);
     }
 
     private void UpdateHealthBar(int maxHealth,float currentHealth)
     {
         _healthBarSprite.fillAmount = currentHealth / maxHealth;
     }
+
+
+
 }

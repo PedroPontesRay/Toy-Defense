@@ -32,16 +32,14 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (other != null)
+            enemy enemyIns = other.GetComponent<enemy>();
+            if (enemyIns != null)
             {
-                Enemy enemyIns = other.GetComponent<Enemy>();
-                enemyIns.TakeDamage(10);
-                Deactivate();
-
-
+                enemyIns.TakeDamage(MainScript.damageAmountMissel);
                 //Debug.Log("Dano dado: "+MainScript.damageAmountStandarBullet);
                 //Debug.Log("Bala acertada");
             }
+            Deactivate();
         }
 
     }
