@@ -1341,10 +1341,10 @@ MonoBehaviour:
   thirdTrainPrefab: {fileID: 8996812778358335103, guid: 71c2cf9fe77a94a4987c4e69e7618816, type: 3}
   spawnPosition: {fileID: 635987991}
   tempoEntreWaves: 5
-  contagemInimigos: 5
+  contagemInimigos: 1
   aumentoPorOnda: 2
   inimigoAumentoVelocidade: 0.2
-  inimigoAumentoVida: 1000
+  inimigoAumentoVida: 2147483647
   atualNumeroInimigos: 0
   atualVelocidadeInimigo: 0
   atualVidaInimigo: 0
