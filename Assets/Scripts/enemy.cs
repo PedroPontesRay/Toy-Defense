@@ -10,18 +10,15 @@ public class Enemy : MonoBehaviour
 
     private int currentWayPointIndex = 0;
 
-<<<<<<< Updated upstream
 
-    [Header("Life")]
-    public int maxLife;
-=======
+
     [Header("Values To change")]
     public int maxLife;
     public float currentSpeed;
     public int valueBricks;
 
     [Header("Objects to reference")]
->>>>>>> Stashed changes
+
     //Health bar
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Image _healthBarSprite;
@@ -30,17 +27,15 @@ public class Enemy : MonoBehaviour
 
     List<GameObject> listOfItensInScene = new List<GameObject>();
 
-    public float currentSpeed;
+    //public float currentSpeed;
     private bool takenDamage;
     private float slowSpeed = 0.6f;
 
     private float timeInslow;
 
-<<<<<<< Updated upstream
-=======
+
     public Interface_Manager interfaceManager;
 
->>>>>>> Stashed changes
     private void Start()
     {
         //vida atual chegar a vida maxima
