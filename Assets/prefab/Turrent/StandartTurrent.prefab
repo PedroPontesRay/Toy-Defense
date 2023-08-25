@@ -73,6 +73,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2997847602132156402}
   - component: {fileID: 2997847602132156413}
+  - component: {fileID: 3086029526059809653}
+  - component: {fileID: -5414630975036505618}
   m_Layer: 0
   m_Name: StandartTurrent
   m_TagString: Untagged
@@ -118,6 +120,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9999999, y: 1.6659347, z: 0.9999999}
   m_Center: {x: 0, y: 0.3329678, z: 0}
+--- !u!114 &3086029526059809653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997847602132156415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72ceb8fddfdd9b41bdce3333e569659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partRotate: {fileID: 2997847602456683502}
+  meshTurrentTrans: {fileID: 8806584177344803459}
+  firePoint: {fileID: 2997847601364565484}
+  RangeFire: 2
+  fireRate: 10
+  updateTargetTime: 0.8
+--- !u!114 &-5414630975036505618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997847602132156415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306c48f72754bf9438c71bced3ef7993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5934592420629238965, guid: 8070581e272055a4aa6218fd569bc2f6, type: 3}
+  amountToPool: 4
 --- !u!1 &2997847602456683502
 GameObject:
   m_ObjectHideFlags: 0

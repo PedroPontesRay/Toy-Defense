@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     private bool takenDamage;
     private float slowSpeed = 0.6f;
 
-    private float timeInslow;
+    private float timeInSlow;
 
 
     public Interface_Manager interfaceManager;
@@ -85,24 +85,13 @@ public class Enemy : MonoBehaviour
             while (distanceToTarget > 0.1f)
             {
                 //verificação para deixa o inimigo lento após tomar dano
-                if(takenDamage == true && timeInslow > 0) 
+                if(timeInSlow > 0) 
                 {
-                    Debug.Log("Reproduzinho Slow");
-                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, slowSpeed * Time.deltaTime);
-
-                    timeInslow -= Time.deltaTime; 
                     //função para voltar a velocidade para normal depois de um tempo sem tomar dano
-                    
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, slowSpeed * Time.deltaTime);
+                    timeInSlow -= Time.deltaTime; 
                 }
-                else
-                {
-                    Debug.Log("Reproduzinho Speed " + timeInslow + takenDamage);
-                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
-                    timeInslow = 1.0f;
-
-                }
-
-
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
                 distanceToTarget = Vector3.Distance(transform.position, targetPosition);
                 yield return null;
             }
@@ -117,7 +106,6 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damageInBulllet)
     {
-        takenDamage = true;
         currentLife -= damageInBulllet;
         UpdateHealthBar(maxLife, currentLife);
 
@@ -132,7 +120,7 @@ public class Enemy : MonoBehaviour
     {
         if (!takenDamage)
             return;
-        timeInslow = 1.0f;
+        timeInSlow = 1.0f;
         takenDamage= false;
     }
 
@@ -142,8 +130,6 @@ public class Enemy : MonoBehaviour
         Interface_Manager.instance.EnemyDied(valueBricks);
 
         Destroy(gameObject);
-
-
         //usar essa função quando o pooling de inimigos estiver pronto
         //gameObject.SetActive(false);
     }

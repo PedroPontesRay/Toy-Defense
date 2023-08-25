@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 8996812778358335091}
   - component: {fileID: 158212547459573579}
   - component: {fileID: 2060355895030340453}
+  - component: {fileID: 3987142045510120342}
   m_Layer: 0
   m_Name: Train_2_Enemy
   m_TagString: Enemy
@@ -454,3 +455,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &3987142045510120342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996812778358335103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333cf9197df9dbe4ebfcc637beddd65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 10
+  currentSpeed: 10
+  valueBricks: 20
+  _canvas: {fileID: 2937731591200380423}
+  _healthBarSprite: {fileID: 1284744065244526661}
+  meshEnemyRotation: {fileID: 1237502353624838627}
+  interfaceManager: {fileID: 0}

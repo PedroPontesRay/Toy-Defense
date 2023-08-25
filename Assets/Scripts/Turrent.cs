@@ -17,11 +17,10 @@ public class Turrent : MonoBehaviour
 
     [Header("Fire Atributes")]
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float attackRange;
-    [SerializeField] private float attackInterval;
-    [SerializeField] private float fireCountDown = 0f;
+    [SerializeField] private float RangeFire;
+    [SerializeField] private float fireRate;
     [SerializeField] private float updateTargetTime;
+    private float fireCountDown = 0f;
 
 
 
@@ -60,7 +59,7 @@ public class Turrent : MonoBehaviour
         }
 
         //define qual o mais perto
-        if(nearestEnemy != null && shortest <= attackRange)
+        if(nearestEnemy != null && shortest <= RangeFire)
         {
             target = nearestEnemy.transform;
         }
@@ -83,8 +82,9 @@ public class Turrent : MonoBehaviour
 
         if(fireCountDown <= 0f)
         {
+            Debug.Log("atirouuuu");
             Firefunc();
-            fireCountDown = 1f / attackInterval;
+            fireCountDown = 1f / fireRate;
         }
 
         fireCountDown -= Time.deltaTime;
@@ -94,9 +94,6 @@ public class Turrent : MonoBehaviour
 
     private void Firefunc()
     {   
-        if(target== null)
-            return;
-        
         GameObject shoot = shootPooling.GetPoolingObject();
         if(shoot == null)
         {
@@ -113,6 +110,6 @@ public class Turrent : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, RangeFire);
     }
 }
