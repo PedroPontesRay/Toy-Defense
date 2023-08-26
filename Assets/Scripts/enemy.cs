@@ -136,7 +136,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         //ADD points
-        Interface_Manager.instance.EnemyDied(valueBricks);
+        Interface_Manager.instanceInterface.EnemyDied(valueBricks);
 
         Destroy(gameObject);
         //usar essa função quando o pooling de inimigos estiver pronto

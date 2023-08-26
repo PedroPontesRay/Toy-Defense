@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speedProjectile;
     [SerializeField] private float timeToDestroy;
-    public int currentDamage;
+
+    private int currentDamage;
 
     private void OnEnable()
     {
@@ -24,6 +26,7 @@ public class Bullet : MonoBehaviour
     private void MoveProject()
     {
         transform.position += transform.forward * (Time.deltaTime * speedProjectile);
+        //transform.position = Vector3.MoveTowards(transform.position,currentTarget.position, speedProjectile * Time.deltaTime);
     }
 
     private void Deactivate()

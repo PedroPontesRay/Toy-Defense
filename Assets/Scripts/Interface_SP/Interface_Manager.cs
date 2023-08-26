@@ -7,12 +7,16 @@ public class Interface_Manager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI waveTxt;
     [SerializeField] private TextMeshProUGUI brickNumberTXT;
+    [Header("Menus")]
+    public GameObject pauseMenu;
+    public GameObject gameplayMenu;
 
-    public static Interface_Manager instance;
+    public static Interface_Manager instanceInterface;
 
     private void Awake()
     {
-        instance = this; 
+        instanceInterface = this; 
+        pauseMenu.SetActive(false);
     }
     //Funcao para atualizar a wave
 
@@ -28,4 +32,14 @@ public class Interface_Manager : MonoBehaviour
         MainScript.brickQnt += valueBrick;
         brickNumberTXT.text = MainScript.brickQnt.ToString();
     }
+
+    public void PauseOn()
+    {
+        pauseMenu.SetActive(true);
+        gameplayMenu.SetActive(false);
+        Time.timeScale = 0.0f;
+    }
+
+
+
 }

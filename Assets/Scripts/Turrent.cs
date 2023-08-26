@@ -7,7 +7,7 @@ public class Turrent : MonoBehaviour
     public static Turrent TurrentInstance;
     private PoolingObj shootPooling;
 
-    private Transform target;
+    public Transform target;
     private string enemytag = "Enemy";
 
 
@@ -90,8 +90,6 @@ public class Turrent : MonoBehaviour
         fireCountDown -= Time.deltaTime;
     }
 
-    
-
     private void Firefunc()
     {   
         GameObject shoot = shootPooling.GetPoolingObject();
@@ -104,8 +102,8 @@ public class Turrent : MonoBehaviour
 
         //ativar o tiro colocando e rotacionando ele na posição correta
         shoot.SetActive(true);
-        shoot.transform.rotation = firePoint.rotation; 
         shoot.transform.position = firePoint.position;
+        shoot.transform.rotation = firePoint.rotation; 
     }
 
     private void OnDrawGizmosSelected()
