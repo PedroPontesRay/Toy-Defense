@@ -472,5 +472,7 @@ MonoBehaviour:
   valueBricks: 20
   _foreground: {fileID: 1284744065244526661}
   meshEnemyRotation: {fileID: 1237502353624838627}
+  objectMesh: {fileID: 1618121706259476059}
+  currentMesh: {fileID: 0}
   slowSpeed: 3
   slowTime: 1

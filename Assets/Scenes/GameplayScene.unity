@@ -2271,9 +2271,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edca640dc02f5b47a3089b93bd13821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstTrainPrefab: {fileID: 8996812778358335103, guid: e82442aca038c604f928163b1877e2ce, type: 3}
-  secondTrainPrefab: {fileID: 8996812778358335103, guid: a0a903a3bcb02d54c8931677f7b68871, type: 3}
-  thirdTrainPrefab: {fileID: 8996812778358335103, guid: 71c2cf9fe77a94a4987c4e69e7618816, type: 3}
+  firstTrainMesh: {fileID: 2882091625789468594, guid: 7ea7ca3ff92173c4cb408db34ddb3cda, type: 3}
+  secondTrainMesh: {fileID: 4552444082358523125, guid: 7ea7ca3ff92173c4cb408db34ddb3cda, type: 3}
+  thirdTrainMesh: {fileID: -5415181211880924672, guid: 7ea7ca3ff92173c4cb408db34ddb3cda, type: 3}
+  prefabEnemy: {fileID: 8996812778358335103, guid: e82442aca038c604f928163b1877e2ce, type: 3}
   spawnPosition: {fileID: 635987991}
   tempoEntreWaves: 3
   contagemInimigos: 5

@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
 
-
-
     [Header("Values To change")]
     public int maxLife;
     public float currentSpeed;
@@ -18,6 +16,8 @@ public class Enemy : MonoBehaviour
     //Health bar
     [SerializeField] private Image _foreground;
     [SerializeField] private Transform meshEnemyRotation;
+    public GameObject objectMesh;
+    public Mesh currentMesh;
     private int currentLife;
 
     //Slow time 
@@ -36,12 +36,13 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        objectMesh.GetComponent<MeshFilter>().sharedMesh = currentMesh;
         //vida atual chegar a vida maxima
         currentLife = maxLife;
-
         interfaceManager = GameObject.FindAnyObjectByType<Interface_Manager>();
 
 
+        //Waypoints
         GameObject[] taggedItems = GameObject.FindGameObjectsWithTag("Waypoint");
         listOfItensInScene.AddRange(taggedItems);
 

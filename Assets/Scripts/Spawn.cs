@@ -9,9 +9,10 @@ using System;
 public class Spawn : MonoBehaviour
 {
     [Header("Prefabs")]
-    [SerializeField] private GameObject firstTrainPrefab;
-    [SerializeField] private GameObject secondTrainPrefab;
-    [SerializeField] private GameObject thirdTrainPrefab;
+    [SerializeField] private Mesh firstTrainMesh;
+    [SerializeField] private Mesh secondTrainMesh;
+    [SerializeField] private Mesh thirdTrainMesh;
+    [SerializeField] private GameObject prefabEnemy;
 
     [Header("Objetos de cena")]
     [SerializeField] private GameObject spawnPosition;
@@ -59,9 +60,10 @@ public class Spawn : MonoBehaviour
             atualNumeroInimigos = contagemInimigos + (currentWave - 1) * aumentoPorOnda;
             enemyCurrent =  atualNumeroInimigos;
 
-            atualVelocidadeInimigo = (TrainChoose().GetComponent<Enemy>().currentSpeed + currentWave) * inimigoAumentoVelocidade;
-            atualVidaInimigo = (TrainChoose().GetComponent<Enemy>().maxLife + currentWave) * inimigoAumentoVida;
-            atualValorBricks = (TrainChoose().GetComponent<Enemy>().valueBricks + currentWave) * aumentoValorBricks;
+            
+            atualVelocidadeInimigo = (prefabEnemy.GetComponent<Enemy>().currentSpeed + currentWave) * inimigoAumentoVelocidade;
+            atualVidaInimigo = (prefabEnemy.GetComponent<Enemy>().maxLife + currentWave) * inimigoAumentoVida;
+            atualValorBricks = (prefabEnemy.GetComponent<Enemy>().valueBricks + currentWave) * aumentoValorBricks;
             
 
 
@@ -88,9 +90,9 @@ public class Spawn : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        GameObject enemyWhoGonnaSpawn = Instantiate(TrainChoose(), spawnPosition.transform.position, Quaternion.identity);
+        GameObject enemyWhoGonnaSpawn = Instantiate(prefabEnemy, spawnPosition.transform.position, Quaternion.identity);
         //Definindo variaveis da Onda Atual nos inimigos
-
+        enemyWhoGonnaSpawn.GetComponent<Enemy>().currentMesh = TrainChoose();
         enemyWhoGonnaSpawn.GetComponent<Enemy>().currentSpeed = atualVelocidadeInimigo;
         enemyWhoGonnaSpawn.GetComponent<Enemy>().maxLife = atualVidaInimigo;
         enemyWhoGonnaSpawn.GetComponent<Enemy>().valueBricks = atualValorBricks;
@@ -114,19 +116,19 @@ public class Spawn : MonoBehaviour
         return false;
     }
     
-    public GameObject TrainChoose()
+    public Mesh TrainChoose()
     {
         if (enemyCurrent == atualNumeroInimigos)
         {
-            return firstTrainPrefab;
+            return firstTrainMesh;
         }
         else if (enemyCurrent == 1)
         {
-            return thirdTrainPrefab;
+            return thirdTrainMesh;
         }
         else if(enemyCurrent < atualNumeroInimigos)
         {
-            return secondTrainPrefab;
+            return secondTrainMesh;
         }
         return null;
     }
