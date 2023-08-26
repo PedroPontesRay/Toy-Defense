@@ -21,6 +21,7 @@ public class Turrent : MonoBehaviour
     [SerializeField] private float fireRate;
     [SerializeField] private float updateTargetTime;
     private float fireCountDown = 0f;
+    public int damageInBullet;
 
 
 
@@ -30,12 +31,12 @@ public class Turrent : MonoBehaviour
 
         InvokeRepeating("UpdateTarget", 0f, updateTargetTime);
 
-        /*
+        
         if(TurrentInstance != null)
         {
             return;
         }
-        TurrentInstance = this;*/
+        TurrentInstance = this;
     }
 
     //update com menos atualizações
@@ -94,6 +95,7 @@ public class Turrent : MonoBehaviour
     private void Firefunc()
     {   
         GameObject shoot = shootPooling.GetPoolingObject();
+
         if(shoot == null)
         {
             shootPooling.CreatingObject();

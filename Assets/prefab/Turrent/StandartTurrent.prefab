@@ -138,6 +138,7 @@ MonoBehaviour:
   RangeFire: 2
   fireRate: 10
   updateTargetTime: 0.8
+  damageInBullet: 100
 --- !u!114 &-5414630975036505618
 MonoBehaviour:
   m_ObjectHideFlags: 0

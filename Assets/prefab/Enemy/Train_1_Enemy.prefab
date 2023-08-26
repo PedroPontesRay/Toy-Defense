@@ -470,8 +470,7 @@ MonoBehaviour:
   maxLife: 10
   currentSpeed: 10
   valueBricks: 20
-  _canvas: {fileID: 2937731591200380423}
-  _healthBarSprite: {fileID: 1284744065244526661}
+  _foreground: {fileID: 1284744065244526661}
   meshEnemyRotation: {fileID: 1237502353624838627}
   slowSpeed: 3
   slowTime: 1

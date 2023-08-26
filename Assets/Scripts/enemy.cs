@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    private GameObject[] waypoint;
-
-    private int currentWayPointIndex = 0;
 
 
 
@@ -18,21 +15,22 @@ public class Enemy : MonoBehaviour
     public int valueBricks;
 
     [Header("Objects to reference")]
-
     //Health bar
-    [SerializeField] private GameObject _canvas;
-    [SerializeField] private Image _healthBarSprite;
+    [SerializeField] private Image _foreground;
     [SerializeField] private Transform meshEnemyRotation;
     private int currentLife;
 
-    List<GameObject> listOfItensInScene = new List<GameObject>();
-
+    //Slow time 
     [SerializeField] private float slowSpeed;
     [SerializeField] private float slowTime;
     private float currentSlowTime;
     private float currentSlowSpeed;
     private bool InSlowTime = false;
 
+    //Waypoints 
+    private GameObject[] waypoint;
+    private int currentWayPointIndex = 0;
+    List<GameObject> listOfItensInScene = new List<GameObject>();
 
     private Interface_Manager interfaceManager;
 
@@ -160,14 +158,14 @@ public class Enemy : MonoBehaviour
         return null;
     }
 
+    //Faz Objeto olhar para o próximo ponto
     private void UpdateLookAt()
     {
-        //Faz Objeto olhar para o próximo ponto
         meshEnemyRotation.LookAt(LookPoint());
     }
 
     private void UpdateHealthBar(int maxHealth,float currentHealth)
     {
-        _healthBarSprite.fillAmount = currentHealth / maxHealth;
+        _foreground.fillAmount = currentHealth / maxHealth;
     }
 }

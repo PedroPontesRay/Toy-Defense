@@ -6,10 +6,13 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speedProjectile;
     [SerializeField] private float timeToDestroy;
+    public int currentDamage;
 
     private void OnEnable()
     {
+        currentDamage = Turrent.TurrentInstance.damageInBullet;
         MoveProject();
+
         Invoke("Deactivate",timeToDestroy);
     }
 
@@ -35,9 +38,9 @@ public class Bullet : MonoBehaviour
             if (other != null)
             {
                 Enemy enemyIns = other.GetComponent<Enemy>();
-                enemyIns.TakeDamage(10);
+                enemyIns.TakeDamage(currentDamage);
+                Deactivate();
                 //enemyIns.Deactivate();
-
 
                 //Debug.Log("Dano dado: "+MainScript.damageAmountStandarBullet);
                 //Debug.Log("Bala acertada");
