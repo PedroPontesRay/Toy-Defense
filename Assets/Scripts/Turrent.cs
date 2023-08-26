@@ -82,7 +82,6 @@ public class Turrent : MonoBehaviour
 
         if(fireCountDown <= 0f)
         {
-            Debug.Log("atirouuuu");
             Firefunc();
             fireCountDown = 1f / fireRate;
         }

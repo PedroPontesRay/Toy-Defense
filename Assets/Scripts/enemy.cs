@@ -27,14 +27,14 @@ public class Enemy : MonoBehaviour
 
     List<GameObject> listOfItensInScene = new List<GameObject>();
 
-    //public float currentSpeed;
-    private bool takenDamage;
-    private float slowSpeed = 0.6f;
+    [SerializeField] private float slowSpeed;
+    [SerializeField] private float slowTime;
+    private float currentSlowTime;
+    private float currentSlowSpeed;
+    private bool InSlowTime = false;
 
-    private float timeInSlow;
 
-
-    public Interface_Manager interfaceManager;
+    private Interface_Manager interfaceManager;
 
     private void Start()
     {
@@ -84,23 +84,18 @@ public class Enemy : MonoBehaviour
 
             while (distanceToTarget > 0.1f)
             {
-                //verificação para deixa o inimigo lento após tomar dano
-                if(timeInSlow > 0) 
-                {
-                    //função para voltar a velocidade para normal depois de um tempo sem tomar dano
-                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, slowSpeed * Time.deltaTime);
-                    timeInSlow -= Time.deltaTime; 
-                }
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+                float speed = currentSpeed - currentSlowSpeed;
+
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
                 distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+
+
                 yield return null;
             }
             currentWayPointIndex++;
             UpdateLookAt();
 
         }
-
-
         ReachThePoint();
     }
 
@@ -112,17 +107,33 @@ public class Enemy : MonoBehaviour
         if (currentLife <= 0)
         {
             Die();
+            return;
         }
-        Invoke("ReturnNormalSpeed", 1.0f);
+
+        if(InSlowTime == false)
+        {
+            StartCoroutine(SlowState());
+        }
     }
 
-    private void ReturnNormalSpeed()
+    private IEnumerator SlowState()
     {
-        if (!takenDamage)
-            return;
-        timeInSlow = 1.0f;
-        takenDamage= false;
+        //estado quando leva dano
+        InSlowTime = true;
+        currentSlowSpeed = slowSpeed;
+        currentSlowTime = slowTime;
+
+        while (currentSlowTime > 0)
+        {
+            currentSlowTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        //estado quando acaba
+        currentSlowSpeed = 0;
+        InSlowTime = false;
     }
+
 
     private void Die()
     {

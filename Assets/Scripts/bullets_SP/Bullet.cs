@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
             {
                 Enemy enemyIns = other.GetComponent<Enemy>();
                 enemyIns.TakeDamage(10);
-                Deactivate();
+                //enemyIns.Deactivate();
 
 
                 //Debug.Log("Dano dado: "+MainScript.damageAmountStandarBullet);
