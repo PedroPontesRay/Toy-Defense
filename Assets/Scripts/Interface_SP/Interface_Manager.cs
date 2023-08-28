@@ -17,6 +17,9 @@ public class Interface_Manager : MonoBehaviour
     {
         instanceInterface = this; 
         pauseMenu.SetActive(false);
+
+
+        Screen.SetResolution(480, 680, true);
     }
     //Funcao para atualizar a wave
 
