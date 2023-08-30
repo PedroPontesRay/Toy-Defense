@@ -4,6 +4,8 @@ public class Shoop : MonoBehaviour
 {
     BuildManager buildManager;
 
+
+
     private void Start()
     {
         buildManager= BuildManager.instance;
@@ -17,7 +19,7 @@ public class Shoop : MonoBehaviour
 
     public void PurchaseTurrentTwo()
     {
-        Debug.Log("Torre 2 comprada");
-        buildManager.SetTurrentToBuild(buildManager.misselTurrentPrefab);
+        /*Debug.Log("Torre 2 comprada");
+        buildManager.SetTurrentToBuild(buildManager.misselTurrentPrefab);*/
     }
 }

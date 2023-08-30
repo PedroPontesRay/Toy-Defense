@@ -17,9 +17,9 @@ public class BuildManager : MonoBehaviour
     }
 
     public GameObject standartTurrentPrefab;
-    public GameObject misselTurrentPrefab;
+    //public GameObject misselTurrentPrefab;
 
-    private GameObject turrentToBuild;
+    public GameObject turrentToBuild;
 
     public GameObject GetTurrentToBuild()
     {

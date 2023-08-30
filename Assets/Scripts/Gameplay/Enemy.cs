@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,23 +7,26 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-
+    #region Variables
     [Header("Values To change")]
     public int maxLife;
     public float currentSpeed;
     public int valueBricks;
 
-    [Header("Objects to reference")]
-    //Health bar
+    public int damageInCastle;
+
+    [Header("Objetos a referenciar")]
     [SerializeField] private Image _foreground;
+    private int currentLife;
+    //Mesh
     [SerializeField] private Transform meshEnemyRotation;
     public GameObject objectMesh;
-    public Mesh currentMesh;
-    private int currentLife;
+    [NonSerialized]public Mesh currentMesh;
+    
 
     //Slow time 
-    [SerializeField] private float slowSpeed;
-    [SerializeField] private float slowTime;
+    private float slowSpeed = 0;
+    private float slowTime = 0;
     private float currentSlowTime;
     private float currentSlowSpeed;
     private bool InSlowTime = false;
@@ -32,14 +36,31 @@ public class Enemy : MonoBehaviour
     private int currentWayPointIndex = 0;
     List<GameObject> listOfItensInScene = new List<GameObject>();
 
-    private Interface_Manager interfaceManager;
+    [NonSerialized]private Interface_Manager interfaceManager;
+    [NonSerialized]private Spawn spawn;
+    [NonSerialized]private Castle castle;
+
+    #endregion
+
+    #region Methods
+
+    private void Awake()
+    {
+        //Add scripts nas variaveis
+        interfaceManager = GameObject.FindAnyObjectByType<Interface_Manager>();
+        spawn = GameObject.FindAnyObjectByType<Spawn>();
+        castle = GameObject.FindAnyObjectByType<Castle>();
+    }
 
     private void Start()
     {
+        //add uma mesh ao inimigo
         objectMesh.GetComponent<MeshFilter>().sharedMesh = currentMesh;
+        
+
         //vida atual chegar a vida maxima
         currentLife = maxLife;
-        interfaceManager = GameObject.FindAnyObjectByType<Interface_Manager>();
+        damageInCastle = 10;
 
 
         //Waypoints
@@ -133,11 +154,11 @@ public class Enemy : MonoBehaviour
         InSlowTime = false;
     }
 
-
     private void Die()
     {
         //ADD points
-        Interface_Manager.instanceInterface.EnemyDied(valueBricks);
+        interfaceManager.EnemyDied(valueBricks);
+        spawn.enemyInGame--;
 
         Destroy(gameObject);
         //usar essa função quando o pooling de inimigos estiver pronto
@@ -146,6 +167,14 @@ public class Enemy : MonoBehaviour
 
     private void ReachThePoint()
     {
+        //Debug.Log("");
+        spawn.enemyInGame--;
+
+        //
+        castle.Damage(10);
+
+        //
+
         Destroy(gameObject);
     }
 
@@ -169,4 +198,6 @@ public class Enemy : MonoBehaviour
     {
         _foreground.fillAmount = currentHealth / maxHealth;
     }
+
+    #endregion
 }

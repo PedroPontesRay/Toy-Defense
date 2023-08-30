@@ -34,15 +34,15 @@ public class Spawn : MonoBehaviour
     [SerializeField] private int atualValorBricks;
 
     private int currentWave;
-    private int enemyCurrent;
+    private int enemyCurrentMesh;
+    [NonSerialized]public int enemyInGame;
+
 
     private Interface_Manager interface_functions;
 
     private void Start()
     {
         interface_functions = GetComponent<Interface_Manager>();
-
-
 
         currentWave = 1;
         interface_functions.UpdateWave(currentWave);
@@ -58,7 +58,7 @@ public class Spawn : MonoBehaviour
             yield return new WaitForSeconds(tempoEntreWaves);
 
             atualNumeroInimigos = contagemInimigos + (currentWave - 1) * aumentoPorOnda;
-            enemyCurrent =  atualNumeroInimigos;
+            enemyCurrentMesh =  atualNumeroInimigos;
 
             
             atualVelocidadeInimigo = (prefabEnemy.GetComponent<Enemy>().currentSpeed + currentWave) * inimigoAumentoVelocidade;
@@ -69,13 +69,15 @@ public class Spawn : MonoBehaviour
 
             for (int i = 0;i < atualNumeroInimigos;i++)
             {
-                yield return new WaitForSeconds(0.5f);        
+                yield return new WaitForSeconds(0.5f);
+
+                enemyInGame++;
+                
                 SpawnEnemy();
             }
 
-            while(HasEnemys())
+            while(enemyInGame != 0)
             {
-                //Pensar numa solução melhor de verificação de inimigos na cena
                 yield return null;
             }
 
@@ -97,36 +99,20 @@ public class Spawn : MonoBehaviour
         enemyWhoGonnaSpawn.GetComponent<Enemy>().maxLife = atualVidaInimigo;
         enemyWhoGonnaSpawn.GetComponent<Enemy>().valueBricks = atualValorBricks;
 
-        enemyCurrent--;
+        enemyCurrentMesh--;
     }
 
-    private bool HasEnemys()
-    {
-        GameObject[] enemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
-
-
-
-        foreach (GameObject enemy in enemiesInScene)
-        {
-            if(enemy != null)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
     public Mesh TrainChoose()
     {
-        if (enemyCurrent == atualNumeroInimigos)
+        if (enemyCurrentMesh == atualNumeroInimigos)
         {
             return firstTrainMesh;
         }
-        else if (enemyCurrent == 1)
+        else if (enemyCurrentMesh == 1)
         {
             return thirdTrainMesh;
         }
-        else if(enemyCurrent < atualNumeroInimigos)
+        else if(enemyCurrentMesh < atualNumeroInimigos)
         {
             return secondTrainMesh;
         }

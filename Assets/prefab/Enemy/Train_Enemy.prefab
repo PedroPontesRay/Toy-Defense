@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618121706259476059}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.000000007232405, y: 0, z: 0.0000000194622}
+  m_LocalPosition: {x: 0.0000000064454926, y: 0.0000000032807486, z: 0.0000000194622}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618121706259476059}
-  m_Mesh: {fileID: 2882091625789468594, guid: 7ea7ca3ff92173c4cb408db34ddb3cda, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &2545575259096088530
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 63d859f8bd4302246aa6fb857e0c7839, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 95a4120a04c515042b1308e162f8c0a2, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 63d859f8bd4302246aa6fb857e0c7839, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 95a4120a04c515042b1308e162f8c0a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 2060355895030340453}
   - component: {fileID: 6295666968140505455}
   m_Layer: 0
-  m_Name: Train_1_Enemy
+  m_Name: Train_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,8 +426,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.40228188, y: 0.49267384, z: 0.5676304}
-  m_Center: {x: 0.006003797, y: 0.016006008, z: 0.0012725443}
+  m_Size: {x: 0.49962425, y: 0.49267384, z: 0.68019116}
+  m_Center: {x: 0.054674983, y: 0.016006008, z: 0.057552934}
 --- !u!54 &2060355895030340453
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -468,11 +468,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 10
-  currentSpeed: 10
+  currentSpeed: 20
   valueBricks: 20
+  damageInCastle: 20
   _foreground: {fileID: 1284744065244526661}
   meshEnemyRotation: {fileID: 1237502353624838627}
   objectMesh: {fileID: 1618121706259476059}
-  currentMesh: {fileID: 0}
-  slowSpeed: 3
-  slowTime: 1
+  interfaceManager: {fileID: 1405838781305009099, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
+  spawn: {fileID: 8536642079301464643, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
+  castle: {fileID: 8996812778358335103, guid: 74d4bbc08c19ebb489932de51e54b3ee, type: 3}

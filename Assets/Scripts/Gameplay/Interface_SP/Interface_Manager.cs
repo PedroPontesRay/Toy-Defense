@@ -38,6 +38,7 @@ public class Interface_Manager : MonoBehaviour
 
     public void PauseOn()
     {
+        
         pauseMenu.SetActive(true);
         gameplayMenu.SetActive(false);
         Time.timeScale = 0.0f;
