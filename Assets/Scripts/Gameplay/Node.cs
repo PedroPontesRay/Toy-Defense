@@ -49,11 +49,6 @@ public class Node : MonoBehaviour /*, IPointerDownHandler, IBeginDragHandler, IE
     {
         rend.material.color= normalColor;
     }
-    /*
-    private void OnMouseDrag()
-    {
-        Debug.Log("begin");
-    }*/
 
     private void BuildTorrent()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,18 +17,19 @@ public class BuildManager : MonoBehaviour
         instance = this;
     }
 
+    //towers
     public GameObject standartTurrentPrefab;
-    //public GameObject misselTurrentPrefab;
+    public GameObject misselTurrentPrefab;
 
-    public GameObject turrentToBuild;
+    [NonSerialized]public GameObject turrentToBuild;
 
     public GameObject GetTurrentToBuild()
     {
         return turrentToBuild;
     }
 
-    public void SetTurrentToBuild(GameObject turrent)
+    public void SetTurrentToBuild(GameObject currentSelectTurrent)
     {
-        turrentToBuild = turrent;
+        turrentToBuild = currentSelectTurrent;
     }
 }

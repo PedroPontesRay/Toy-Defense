@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Objetos a referenciar")]
     [SerializeField] private Image _foreground;
-    private int currentLife;
+    [NonSerialized]  public int currentLife;
     //Mesh
     [SerializeField] private Transform meshEnemyRotation;
     public GameObject objectMesh;
@@ -32,9 +33,8 @@ public class Enemy : MonoBehaviour
     private bool InSlowTime = false;
 
     //Waypoints 
-    private GameObject[] waypoint;
     private int currentWayPointIndex = 0;
-    List<GameObject> listOfItensInScene = new List<GameObject>();
+    GameObject[] wayPoints;
 
     [NonSerialized]private Interface_Manager interfaceManager;
     [NonSerialized]private Spawn spawn;
@@ -64,42 +64,31 @@ public class Enemy : MonoBehaviour
 
 
         //Waypoints
-        GameObject[] taggedItems = GameObject.FindGameObjectsWithTag("Waypoint");
-        listOfItensInScene.AddRange(taggedItems);
+        wayPoints = GameObject.FindGameObjectsWithTag("Waypoint");
 
-        List<GameObject> listOfItensInSceneOrdered = OrderItemsByName(listOfItensInScene);
+        List<GameObject> listOfItensInSceneOrdered = wayPoints.OrderBy(waypoint => waypoint.name).ToList();
 
-        waypoint = listOfItensInSceneOrdered.ToArray();
+        wayPoints = listOfItensInSceneOrdered.ToArray();
 
-
+        /*
         // Debug para printar que a ordem esta correta
-        /*for (int i = 0; i < waypoint.Length; i++)
+        for (int i = 0; i < wayPoints.Length; i++)
         {
-            Debug.Log("Item " + i + ": " + waypoint[i].name);
-        }
-        
-        foreach(GameObject item in waypoint)
-        {
-            Debug.Log(item.name);
+            Debug.Log("Item " + i + ": " + wayPoints[i].name);
         }*/
 
 
         StartCoroutine(MoveToPoint());
         meshEnemyRotation.transform.LookAt(LookPoint());
-        
+
     }
 
-    private List<GameObject> OrderItemsByName(List<GameObject> unsorted)
-    {
-        List<GameObject> ordered = unsorted.OrderBy(item => item.name).ToList();
-        return ordered;
-    }
 
     private IEnumerator MoveToPoint()
     {
-        while (currentWayPointIndex < waypoint.Length)
+        while (currentWayPointIndex < wayPoints.Length)
         {
-            Vector3 targetPosition = waypoint[currentWayPointIndex].transform.position;
+            Vector3 targetPosition = wayPoints[currentWayPointIndex].transform.position;
             float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
 
             while (distanceToTarget > 0.1f)
@@ -113,10 +102,28 @@ public class Enemy : MonoBehaviour
                 yield return null;
             }
             currentWayPointIndex++;
+
+            
+            
+
+            
+
             UpdateLookAt();
 
         }
         ReachThePoint();
+    }
+   
+    public bool PassOnPoint()
+    {
+        if (currentWayPointIndex > 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void TakeDamage(int damageInBulllet)
@@ -181,9 +188,9 @@ public class Enemy : MonoBehaviour
     //retorna o transform que o inimigo tem que olhar
     private Transform LookPoint()
     {
-        if (waypoint.Length != currentWayPointIndex)
+        if (wayPoints.Length != currentWayPointIndex)
         {
-            return waypoint[currentWayPointIndex].transform;
+            return wayPoints[currentWayPointIndex].transform;
         }
         return null;
     }

@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3086029526059809653}
   - component: {fileID: -5414630975036505618}
   m_Layer: 0
-  m_Name: StandartTurrent
+  m_Name: MisselDinossor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,14 +132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72ceb8fddfdd9b41bdce3333e569659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTypeTurrent: 1
-  firePoint: {fileID: 2997847601364565484}
-  RangeFire: 3.17
-  fireRate: 10
-  updateTargetTime: 0.8
-  damageInBullet: 100
+  target: {fileID: 0}
   partRotate: {fileID: 2997847602456683502}
   meshTurrentTrans: {fileID: 8806584177344803459}
+  firePoint: {fileID: 2997847601364565484}
+  RangeFire: 3.27
+  fireRate: 1
+  updateTargetTime: 1
+  currentTypeTurrent: 2
+  damageInBullet: 1000
 --- !u!114 &-5414630975036505618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306c48f72754bf9438c71bced3ef7993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5934592420629238965, guid: 8070581e272055a4aa6218fd569bc2f6, type: 3}
-  amountToPool: 4
+  prefab: {fileID: 5934592420629238965, guid: 7fd08ecbe6d024f4fa7259bc1d9002b1, type: 3}
+  amountToPool: 2
 --- !u!1 &2997847602456683502
 GameObject:
   m_ObjectHideFlags: 0

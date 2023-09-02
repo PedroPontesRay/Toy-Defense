@@ -58,6 +58,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedProjectile: 20
   timeToDestroy: 0.16
+  target: {fileID: 0}
+  currentTypeShoot: 0
+  turrentIS: {fileID: 3086029526059809653, guid: 9a2ae25f5508a8b46b3d2779d91a6fe5, type: 3}
 --- !u!23 &1626027809022541140
 MeshRenderer:
   m_ObjectHideFlags: 0

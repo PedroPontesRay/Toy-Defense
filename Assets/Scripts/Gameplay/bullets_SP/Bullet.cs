@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,28 +6,45 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public enum shootType
+    {
+        GUMBAL,
+        MISSEL
+    }
+    
     [SerializeField] private float speedProjectile;
     [SerializeField] private float timeToDestroy;
-
-    private int currentDamage;
+    [SerializeField] private shootType currentTypeShoot;
+    [NonSerialized] public Transform target;
+    [NonSerialized] public int currentDamage;
 
     private void OnEnable()
     {
-        currentDamage = Turrent.TurrentInstance.damageInBullet;
-        MoveProject();
-
         Invoke("Deactivate",timeToDestroy);
     }
 
     public void Update()
     {
-        MoveProject();
+        MoveProject(currentTypeShoot);
     }
 
-    private void MoveProject()
+    private void MoveProject(shootType currentType)
     {
-        transform.position += transform.forward * (Time.deltaTime * speedProjectile);
-        //transform.position = Vector3.MoveTowards(transform.position,currentTarget.position, speedProjectile * Time.deltaTime);
+        if (target == null)
+        {
+            Deactivate();
+            return;
+        }
+
+        if (currentType == shootType.GUMBAL)
+        {
+            transform.position += transform.forward * (Time.deltaTime * speedProjectile);
+        }
+        else if (currentType == shootType.MISSEL) 
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speedProjectile * Time.deltaTime);
+            transform.LookAt(target);
+        }
     }
 
     private void Deactivate()
@@ -44,9 +62,6 @@ public class Bullet : MonoBehaviour
                 enemyIns.TakeDamage(currentDamage);
                 Deactivate();
                 //enemyIns.Deactivate();
-
-                //Debug.Log("Dano dado: "+MainScript.damageAmountStandarBullet);
-                //Debug.Log("Bala acertada");
             }
         }
 

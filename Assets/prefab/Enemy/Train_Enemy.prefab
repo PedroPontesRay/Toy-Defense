@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 10
-  currentSpeed: 20
+  currentSpeed: 1
   valueBricks: 20
   damageInCastle: 20
   _foreground: {fileID: 1284744065244526661}

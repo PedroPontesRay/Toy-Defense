@@ -37,6 +37,9 @@ public class Spawn : MonoBehaviour
     private int enemyCurrentMesh;
     [NonSerialized]public int enemyInGame;
 
+    public Action<bool> passOnWaypoint;
+
+
 
     private Interface_Manager interface_functions;
 
@@ -64,17 +67,24 @@ public class Spawn : MonoBehaviour
             atualVelocidadeInimigo = (prefabEnemy.GetComponent<Enemy>().currentSpeed + currentWave) * inimigoAumentoVelocidade;
             atualVidaInimigo = (prefabEnemy.GetComponent<Enemy>().maxLife + currentWave) * inimigoAumentoVida;
             atualValorBricks = (prefabEnemy.GetComponent<Enemy>().valueBricks + currentWave) * aumentoValorBricks;
+
+
             
-
-
             for (int i = 0;i < atualNumeroInimigos;i++)
             {
-                yield return new WaitForSeconds(0.5f);
+                /*bool teste = false;
+
+                passOnWaypoint = EnemySpawn().GetComponent<Enemy>().PassOnPoint(true);
+
+                yield return new WaitUntil(() => passOnWaypoint(true))*/
+                yield return new WaitForSeconds(1.0f);
 
                 enemyInGame++;
-                
-                SpawnEnemy();
+
+                EnemySpawn();
             }
+
+            
 
             while(enemyInGame != 0)
             {
@@ -90,9 +100,10 @@ public class Spawn : MonoBehaviour
 
     }
 
-    private void SpawnEnemy()
+    private void EnemySpawn()
     {
         GameObject enemyWhoGonnaSpawn = Instantiate(prefabEnemy, spawnPosition.transform.position, Quaternion.identity);
+
         //Definindo variaveis da Onda Atual nos inimigos
         enemyWhoGonnaSpawn.GetComponent<Enemy>().currentMesh = TrainChoose();
         enemyWhoGonnaSpawn.GetComponent<Enemy>().currentSpeed = atualVelocidadeInimigo;

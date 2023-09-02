@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class Turrent : MonoBehaviour
 {
-    public static Turrent TurrentInstance;
-    private PoolingObj shootPooling;
+    private enum typeTurrent
+    {
+        NONE,
+        GUMBALL,
+        MISSEL,
+        SOLDIER,
+        CROCO,
+        PIRATE
+    }
 
-    public Transform target;
+    private PoolingObj shootPooling;
+    private Transform target;
     private string enemytag = "Enemy";
 
 
-    [Header("Rotate-Mesh")]
-    public GameObject partRotate;
-    public Transform meshTurrentTrans;
 
     [Header("Fire Atributes")]
+    [SerializeField] private typeTurrent currentTypeTurrent;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float RangeFire;
     [SerializeField] private float fireRate;
@@ -23,25 +29,38 @@ public class Turrent : MonoBehaviour
     private float fireCountDown = 0f;
     public int damageInBullet;
 
+    [Header("Rotate-Mesh")]
+    public GameObject partRotate;
+    public Transform meshTurrentTrans;
 
 
-    void Start()
+    void OnEnable()
     {
         shootPooling = GetComponent<PoolingObj>();
-
-        InvokeRepeating("UpdateTarget", 0f, updateTargetTime);
-
-        
-        if(TurrentInstance != null)
+        switch(currentTypeTurrent)
         {
-            return;
+            case typeTurrent.NONE:
+                break; 
+            case typeTurrent.GUMBALL:
+                InvokeRepeating("UpdateTargetByDistance", 0f, updateTargetTime);
+                break;
+            case typeTurrent.MISSEL:
+                InvokeRepeating("UpdateTargetByLifeEnemy", 0f, updateTargetTime);
+                break;
+            case typeTurrent.SOLDIER:
+                break;
+            case typeTurrent.CROCO:
+                break;
+            case typeTurrent.PIRATE:
+                break;
         }
-        TurrentInstance = this;
+        
     }
 
     //update com menos atualizações
-    void UpdateTarget()
+    void UpdateTargetByDistance()
     {
+        Debug.Log("GumbelUPDATE");
         //add todos os inimigos da area em um array
         GameObject[] enemies= GameObject.FindGameObjectsWithTag(enemytag);
         float shortest = Mathf.Infinity;
@@ -70,10 +89,44 @@ public class Turrent : MonoBehaviour
         }
         
     }
+
+    void UpdateTargetByLifeEnemy()
+    {
+        Debug.Log("MisselUPDATE");
+        //add todos os inimigos da area em um array
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemytag);
+        int lowestHealth = int.MaxValue;
+
+        GameObject enemyWithLowestHealth = null;
+
+        //verifica a posição dos mesmos
+        foreach (GameObject enemy in enemies)
+        {
+            Enemy enemyClass = enemy.GetComponent<Enemy>();
+            int enemylife = enemyClass.currentLife;
+
+            if (enemylife > lowestHealth)
+            {
+                lowestHealth = enemylife;
+                enemyWithLowestHealth = enemyClass.gameObject;
+            }
+        }
+
+
+
+        //define qual o mais perto
+        if (enemyWithLowestHealth != null && lowestHealth <= RangeFire)
+        {
+            target = enemyWithLowestHealth.transform;
+        }
+        else
+        {
+            target = null;
+        }
+    }
     
     private void Update()
     {
-        
         if (target == null) 
             return;
 
@@ -83,16 +136,17 @@ public class Turrent : MonoBehaviour
 
         if(fireCountDown <= 0f)
         {
-            Firefunc();
+            Firefunc(firePoint);
             fireCountDown = 1f / fireRate;
         }
 
         fireCountDown -= Time.deltaTime;
     }
 
-    private void Firefunc()
+    private void Firefunc(Transform whereFirePoints)
     {   
         GameObject shoot = shootPooling.GetPoolingObject();
+        
 
         if(shoot == null)
         {
@@ -102,8 +156,10 @@ public class Turrent : MonoBehaviour
 
         //ativar o tiro colocando e rotacionando ele na posição correta
         shoot.SetActive(true);
-        shoot.transform.position = firePoint.position;
-        shoot.transform.rotation = firePoint.rotation; 
+        shoot.GetComponent<Bullet>().target = target;
+        shoot.GetComponent<Bullet>().currentDamage = damageInBullet;
+        shoot.transform.position = whereFirePoints.position;
+        shoot.transform.rotation = whereFirePoints.rotation; 
     }
 
     private void OnDrawGizmosSelected()

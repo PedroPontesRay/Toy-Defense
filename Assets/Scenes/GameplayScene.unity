@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1524,6 +1524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 424836652}
+  - component: {fileID: 424836653}
   m_Layer: 0
   m_Name: Waypoint
   m_TagString: Untagged
@@ -1543,8 +1544,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1472104899}
   - {fileID: 635987992}
+  - {fileID: 1472104899}
   - {fileID: 1809343097}
   - {fileID: 1457286292}
   - {fileID: 1865490167}
@@ -1553,6 +1554,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &424836653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424836651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e976171bbff57e44a2bfbacbc865cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 635987992}
+  - {fileID: 1472104899}
+  - {fileID: 1809343097}
+  - {fileID: 1457286292}
+  - {fileID: 1865490167}
+  - {fileID: 823864074}
+  - {fileID: 932271374}
 --- !u!1 &434235865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,7 +2214,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &635987991
 GameObject:
@@ -2510,7 +2531,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1541909916}
         m_TargetAssemblyTypeName: Shoop, Assembly-CSharp
-        m_MethodName: PurchaseTurrentOne
+        m_MethodName: PurchaseTurrentTwo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2636,7 +2657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8996812778358335091, guid: 74d4bbc08c19ebb489932de51e54b3ee, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8996812778358335091, guid: 74d4bbc08c19ebb489932de51e54b3ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2681,6 +2702,10 @@ PrefabInstance:
     - target: {fileID: 8996812778358335103, guid: 74d4bbc08c19ebb489932de51e54b3ee, type: 3}
       propertyPath: m_Name
       value: Castle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996812778358335103, guid: 74d4bbc08c19ebb489932de51e54b3ee, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5038,7 +5063,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1 &1101430363
 GameObject:
@@ -6137,7 +6162,7 @@ RectTransform:
   m_Children:
   - {fileID: 2021743432}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6659,7 +6684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457286291}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3199999, y: -1.39, z: 2.56}
+  m_LocalPosition: {x: 1.81, y: -1.39, z: 2.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9141,7 +9166,7 @@ RectTransform:
   m_Children:
   - {fileID: 1405987782}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9494,7 +9519,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: -0.003540039}
+  m_AnchoredPosition: {x: 0.000030517578, y: -0.003540039}
   m_SizeDelta: {x: 31.8927, y: 54.69922}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2021743433
@@ -10098,7 +10123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113510877222831063, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7113510877222831063, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10140,6 +10165,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8261100837210545310, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
+      propertyPath: misselTurrentPrefab
+      value: 
+      objectReference: {fileID: 2997847602132156415, guid: 75d6e9530d04d3f4eb9a1bb3065b14c9, type: 3}
     - target: {fileID: 8536642079301464643, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
       propertyPath: spawnPosition
       value: 
