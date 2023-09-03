@@ -132,15 +132,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72ceb8fddfdd9b41bdce3333e569659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  partRotate: {fileID: 2997847602456683502}
-  meshTurrentTrans: {fileID: 8806584177344803459}
+  currentTypeTurrent: 2
   firePoint: {fileID: 2997847601364565484}
   RangeFire: 3.27
   fireRate: 1
   updateTargetTime: 1
-  currentTypeTurrent: 2
-  damageInBullet: 1000
+  damageInBullet: 10
+  partRotate: {fileID: 2997847602456683502}
+  meshTurrentTrans: {fileID: 8806584177344803459}
 --- !u!114 &-5414630975036505618
 MonoBehaviour:
   m_ObjectHideFlags: 0

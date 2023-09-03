@@ -92,37 +92,38 @@ public class Turrent : MonoBehaviour
 
     void UpdateTargetByLifeEnemy()
     {
-        Debug.Log("MisselUPDATE");
+        
         //add todos os inimigos da area em um array
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemytag);
-        int lowestHealth = int.MaxValue;
 
-        GameObject enemyWithLowestHealth = null;
+        int highLife = int.MaxValue;
 
+        GameObject enemyWithHighHealth = null;
+        
         //verifica a posição dos mesmos
         foreach (GameObject enemy in enemies)
         {
-            Enemy enemyClass = enemy.GetComponent<Enemy>();
-            int enemylife = enemyClass.currentLife;
+            int enemylife = enemy.GetComponent<Enemy>().currentLife;
 
-            if (enemylife > lowestHealth)
+            if (enemylife < highLife)
             {
-                lowestHealth = enemylife;
-                enemyWithLowestHealth = enemyClass.gameObject;
+                highLife = enemylife;
+                enemyWithHighHealth = enemy;
             }
         }
 
-
-
         //define qual o mais perto
-        if (enemyWithLowestHealth != null && lowestHealth <= RangeFire)
+        if (enemyWithHighHealth != null)
         {
-            target = enemyWithLowestHealth.transform;
+            target = enemyWithHighHealth.transform;
+            Debug.Log(target.name);
         }
         else
         {
             target = null;
         }
+
+        
     }
     
     private void Update()
