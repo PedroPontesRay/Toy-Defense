@@ -26,8 +26,7 @@ public class Enemy : MonoBehaviour
     
 
     //Slow time 
-    private float slowSpeed = 0;
-    private float slowTime = 0;
+
     private float currentSlowTime;
     private float currentSlowSpeed;
     private bool InSlowTime = false;
@@ -94,7 +93,10 @@ public class Enemy : MonoBehaviour
             while (distanceToTarget > 0.1f)
             {
                 float speed = currentSpeed - currentSlowSpeed;
-
+                if(speed < 0)
+                {
+                    speed = 0.1f;
+                }
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
                 distanceToTarget = Vector3.Distance(transform.position, targetPosition);
 
@@ -136,9 +138,14 @@ public class Enemy : MonoBehaviour
             Die();
             return;
         }
-
-        if(InSlowTime == false)
+        
+    }
+    public void SlowStateFunc(float time, float speed)
+    {
+        if (InSlowTime == false)
         {
+            currentSlowSpeed = speed;
+            currentSlowTime = time;
             StartCoroutine(SlowState());
         }
     }
@@ -147,8 +154,7 @@ public class Enemy : MonoBehaviour
     {
         //estado quando leva dano
         InSlowTime = true;
-        currentSlowSpeed = slowSpeed;
-        currentSlowTime = slowTime;
+        
 
         while (currentSlowTime > 0)
         {

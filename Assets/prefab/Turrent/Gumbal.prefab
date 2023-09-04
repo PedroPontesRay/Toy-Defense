@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3086029526059809653}
   - component: {fileID: -5414630975036505618}
   m_Layer: 0
-  m_Name: StandartTurrent
+  m_Name: Gumbal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

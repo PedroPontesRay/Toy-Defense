@@ -20,6 +20,7 @@ public class BuildManager : MonoBehaviour
     //towers
     public GameObject standartTurrentPrefab;
     public GameObject misselTurrentPrefab;
+    public GameObject soldierTurrentPrefab;
 
     [NonSerialized]public GameObject turrentToBuild;
 

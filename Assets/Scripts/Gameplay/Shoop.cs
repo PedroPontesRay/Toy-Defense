@@ -20,4 +20,8 @@ public class Shoop : MonoBehaviour
         Debug.Log("Torre 2 comprada");
         buildManager.SetTurrentToBuild(buildManager.misselTurrentPrefab);
     }
+    public void PurchaseTurrentThree()
+    {
+        buildManager.SetTurrentToBuild(buildManager.soldierTurrentPrefab);
+    }
 }

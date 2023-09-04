@@ -15,7 +15,7 @@ public class Turrent : MonoBehaviour
     }
 
     private PoolingObj shootPooling;
-    private Transform target;
+    private GameObject target;
     private string enemytag = "Enemy";
 
 
@@ -40,6 +40,7 @@ public class Turrent : MonoBehaviour
         switch(currentTypeTurrent)
         {
             case typeTurrent.NONE:
+                Debug.LogError("TIPO NÃO SETADO");
                 break; 
             case typeTurrent.GUMBALL:
                 InvokeRepeating("UpdateTargetByDistance", 0f, updateTargetTime);
@@ -48,6 +49,7 @@ public class Turrent : MonoBehaviour
                 InvokeRepeating("UpdateTargetByLifeEnemy", 0f, updateTargetTime);
                 break;
             case typeTurrent.SOLDIER:
+                InvokeRepeating("UpdateTargetByDistance", 0f, updateTargetTime);
                 break;
             case typeTurrent.CROCO:
                 break;
@@ -60,7 +62,6 @@ public class Turrent : MonoBehaviour
     //update com menos atualizações
     void UpdateTargetByDistance()
     {
-        Debug.Log("GumbelUPDATE");
         //add todos os inimigos da area em um array
         GameObject[] enemies= GameObject.FindGameObjectsWithTag(enemytag);
         float shortest = Mathf.Infinity;
@@ -81,7 +82,7 @@ public class Turrent : MonoBehaviour
         //define qual o mais perto
         if(nearestEnemy != null && shortest <= RangeFire)
         {
-            target = nearestEnemy.transform;
+            target = nearestEnemy;
         }
         else
         {
@@ -115,8 +116,7 @@ public class Turrent : MonoBehaviour
         //define qual o mais perto
         if (enemyWithHighHealth != null)
         {
-            target = enemyWithHighHealth.transform;
-            Debug.Log(target.name);
+            target = enemyWithHighHealth;
         }
         else
         {
@@ -131,7 +131,8 @@ public class Turrent : MonoBehaviour
         if (target == null) 
             return;
 
-        partRotate.transform.LookAt(target);
+        //setar rotação da torre para olhar para o alvo
+        partRotate.transform.LookAt(target.transform);
         Vector3 rotationMesh = partRotate.transform.eulerAngles;
         meshTurrentTrans.transform.rotation = Quaternion.Euler(0, rotationMesh.y, 0);
 
@@ -157,7 +158,7 @@ public class Turrent : MonoBehaviour
 
         //ativar o tiro colocando e rotacionando ele na posição correta
         shoot.SetActive(true);
-        shoot.GetComponent<Bullet>().target = target;
+        shoot.GetComponent<Bullet>().target = target.transform;
         shoot.GetComponent<Bullet>().currentDamage = damageInBullet;
         shoot.transform.position = whereFirePoints.position;
         shoot.transform.rotation = whereFirePoints.rotation; 

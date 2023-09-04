@@ -9,19 +9,47 @@ public class Bullet : MonoBehaviour
     public enum shootType
     {
         GUMBAL,
-        MISSEL
+        MISSEL,
+        ICESHOOT
     }
     
-    [SerializeField] private float speedProjectile;
-    [SerializeField] private float timeToDestroy;
     [SerializeField] private shootType currentTypeShoot;
+    private float speedProjectile;
+    private float timeToDestroy;
     [NonSerialized] public Transform target;
     [NonSerialized] public int currentDamage;
+
+    //Slow
+    private float currentSlowSpeed;
+    private float currentSpeedTime;
+
+    private void Awake()
+    {
+        if (currentTypeShoot == shootType.ICESHOOT)
+        {
+            speedProjectile = 30f;
+            timeToDestroy = 0.6f;
+            currentSlowSpeed = 1.0f;
+            currentSpeedTime = 3.0f;
+        }
+        else if (currentTypeShoot == shootType.MISSEL)
+        {
+            speedProjectile = 2f;
+            timeToDestroy = 2f;
+        }
+        else if (currentTypeShoot == shootType.GUMBAL)
+        {
+            speedProjectile = 30f;
+            timeToDestroy = 0.6f;
+        }
+    }
 
     private void OnEnable()
     {
         Invoke("Deactivate",timeToDestroy);
     }
+
+
 
     public void Update()
     {
@@ -45,6 +73,10 @@ public class Bullet : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target.position, speedProjectile * Time.deltaTime);
             transform.LookAt(target);
         }
+        else if (currentType == shootType.ICESHOOT)
+        {
+            transform.position += transform.forward * (Time.deltaTime * speedProjectile);
+        }
     }
 
     private void Deactivate()
@@ -56,13 +88,11 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (other != null)
-            {
-                Enemy enemyIns = other.GetComponent<Enemy>();
-                enemyIns.TakeDamage(currentDamage);
-                Deactivate();
-                //enemyIns.Deactivate();
-            }
+            Enemy enemyIns = other.GetComponent<Enemy>();
+            enemyIns.TakeDamage(currentDamage);
+            if(currentTypeShoot == shootType.ICESHOOT)
+            { enemyIns.SlowStateFunc(currentSpeedTime,currentSlowSpeed);}
+            Deactivate();
         }
 
     }
