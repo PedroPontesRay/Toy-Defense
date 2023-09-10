@@ -1,27 +1,29 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shoop : MonoBehaviour
 {
-    BuildManager buildManager;
+    //1Gumbal,2missel,3pirate,4soldier
+    public GameObject[] turrentsPrefab;
+    public Sprite[] turrentsSprites;
 
-    private void Start()
-    {
-        buildManager= BuildManager.instance;
-    }
+    //imagens estão na ordem junto com os botões
+    public Sloot[] SlootsTurrents;
 
-    public void PurchaseTurrentOne()
-    {
-        Debug.Log("Torre 1 comprada");
-        buildManager.SetTurrentToBuild(buildManager.standartTurrentPrefab);
-    }
 
-    public void PurchaseTurrentTwo()
+    public int[] towerInfo;
+
+    public void Awake()
     {
-        Debug.Log("Torre 2 comprada");
-        buildManager.SetTurrentToBuild(buildManager.misselTurrentPrefab);
-    }
-    public void PurchaseTurrentThree()
-    {
-        buildManager.SetTurrentToBuild(buildManager.soldierTurrentPrefab);
+      
+        for(int i = 0;i< SlootsTurrents.Length;i++)
+        {
+            if (SlootsTurrents[i] != null)
+            {
+                SlootsTurrents[i].SetSlootSet(turrentsSprites[towerInfo[i]], turrentsPrefab[towerInfo[i]]);
+            }
+        }       
+
     }
 }

@@ -21,10 +21,8 @@ public class Interface_Manager : MonoBehaviour
 
         Screen.SetResolution(480, 680, true);
     }
+
     //Funcao para atualizar a wave
-
-
-
     public void UpdateWave(int waveCurrent)
     {
         waveTxt.text = "Onda " + waveCurrent.ToString();
@@ -32,13 +30,12 @@ public class Interface_Manager : MonoBehaviour
 
     public void EnemyDied(int valueBrick)
     {
-        MainScript.brickQnt += valueBrick;
+        MainScript.brickQnt += (valueBrick / 2);
         brickNumberTXT.text = MainScript.brickQnt.ToString();
     }
 
     public void PauseOn()
     {
-        
         pauseMenu.SetActive(true);
         gameplayMenu.SetActive(false);
         Time.timeScale = 0.0f;

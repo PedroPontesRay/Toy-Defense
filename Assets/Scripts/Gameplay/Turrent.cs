@@ -11,19 +11,16 @@ public class Turrent : MonoBehaviour
         MISSEL,
         SOLDIER,
         CROCO,
-        PIRATE
     }
 
     private PoolingObj shootPooling;
     private GameObject target;
     private string enemytag = "Enemy";
 
-
-
     [Header("Fire Atributes")]
     [SerializeField] private typeTurrent currentTypeTurrent;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float RangeFire;
+    [SerializeField] private float rangeFire;
     [SerializeField] private float fireRate;
     [SerializeField] private float updateTargetTime;
     private float fireCountDown = 0f;
@@ -36,7 +33,6 @@ public class Turrent : MonoBehaviour
 
     void OnEnable()
     {
-        shootPooling = GetComponent<PoolingObj>();
         switch(currentTypeTurrent)
         {
             case typeTurrent.NONE:
@@ -53,15 +49,16 @@ public class Turrent : MonoBehaviour
                 break;
             case typeTurrent.CROCO:
                 break;
-            case typeTurrent.PIRATE:
-                break;
         }
-        
+        if (GetComponent<PoolingObj>() == null)
+            return;
+        shootPooling = GetComponent<PoolingObj>();
     }
 
     //update com menos atualizações
     void UpdateTargetByDistance()
     {
+
         //add todos os inimigos da area em um array
         GameObject[] enemies= GameObject.FindGameObjectsWithTag(enemytag);
         float shortest = Mathf.Infinity;
@@ -80,7 +77,7 @@ public class Turrent : MonoBehaviour
         }
 
         //define qual o mais perto
-        if(nearestEnemy != null && shortest <= RangeFire)
+        if(nearestEnemy != null && shortest <= rangeFire)
         {
             target = nearestEnemy;
         }
@@ -93,14 +90,14 @@ public class Turrent : MonoBehaviour
 
     void UpdateTargetByLifeEnemy()
     {
-        
         //add todos os inimigos da area em um array
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemytag);
 
         int highLife = int.MaxValue;
 
         GameObject enemyWithHighHealth = null;
-        
+        float enemyDistance = 0;
+
         //verifica a posição dos mesmos
         foreach (GameObject enemy in enemies)
         {
@@ -110,11 +107,14 @@ public class Turrent : MonoBehaviour
             {
                 highLife = enemylife;
                 enemyWithHighHealth = enemy;
+                enemyDistance = Vector3.Distance(transform.position, enemyWithHighHealth.transform.position);
             }
         }
 
+        
+
         //define qual o mais perto
-        if (enemyWithHighHealth != null)
+        if (enemyWithHighHealth != null && enemyDistance <= rangeFire)
         {
             target = enemyWithHighHealth;
         }
@@ -122,13 +122,29 @@ public class Turrent : MonoBehaviour
         {
             target = null;
         }
+    }
+    void DamageByPirate()
+    {
+        // Encontre todos os inimigos no alcance da torre
+        Collider[] colliders = Physics.OverlapSphere(transform.position, rangeFire);
 
-        
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                // Aplique dano ao inimigo
+                Enemy enemy = collider.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damageInBullet);
+                }
+            }
+        }
     }
     
     private void Update()
     {
-        if (target == null) 
+        if (target == null)
             return;
 
         //setar rotação da torre para olhar para o alvo
@@ -138,8 +154,10 @@ public class Turrent : MonoBehaviour
 
         if(fireCountDown <= 0f)
         {
-            Firefunc(firePoint);
             fireCountDown = 1f / fireRate;
+
+            Firefunc(firePoint);
+
         }
 
         fireCountDown -= Time.deltaTime;
@@ -167,6 +185,6 @@ public class Turrent : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, RangeFire);
+        Gizmos.DrawWireSphere(transform.position, rangeFire);
     }
 }

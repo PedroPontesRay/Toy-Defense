@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     //Mesh
     [SerializeField] private Transform meshEnemyRotation;
     public GameObject objectMesh;
-    [NonSerialized]public Mesh currentMesh;
+    [NonSerialized] public Mesh currentMesh;
     
 
     //Slow time 
@@ -55,12 +55,10 @@ public class Enemy : MonoBehaviour
     {
         //add uma mesh ao inimigo
         objectMesh.GetComponent<MeshFilter>().sharedMesh = currentMesh;
-        
 
         //vida atual chegar a vida maxima
         currentLife = maxLife;
         damageInCastle = 10;
-
 
         //Waypoints
         wayPoints = GameObject.FindGameObjectsWithTag("Waypoint");
@@ -81,7 +79,6 @@ public class Enemy : MonoBehaviour
         meshEnemyRotation.transform.LookAt(LookPoint());
 
     }
-
 
     private IEnumerator MoveToPoint()
     {
@@ -105,40 +102,26 @@ public class Enemy : MonoBehaviour
             }
             currentWayPointIndex++;
 
-            
-            
-
-            
-
-            UpdateLookAt();
+     
+            meshEnemyRotation.LookAt(LookPoint());//Faz Objeto olhar para o próximo ponto
 
         }
         ReachThePoint();
     }
-   
     public bool PassOnPoint()
     {
-        if (currentWayPointIndex > 1)
+        if (currentWayPointIndex >= 1)
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
-
     public void TakeDamage(int damageInBulllet)
     {
-        currentLife -= damageInBulllet;
+        currentLife =- damageInBulllet;
         UpdateHealthBar(maxLife, currentLife);
-
-        if (currentLife <= 0)
-        {
-            Die();
-            return;
-        }
-        
+        if(currentLife <= 0)
+        Die();
     }
     public void SlowStateFunc(float time, float speed)
     {
@@ -149,13 +132,11 @@ public class Enemy : MonoBehaviour
             StartCoroutine(SlowState());
         }
     }
-
     private IEnumerator SlowState()
     {
         //estado quando leva dano
         InSlowTime = true;
         
-
         while (currentSlowTime > 0)
         {
             currentSlowTime -= Time.deltaTime;
@@ -166,7 +147,6 @@ public class Enemy : MonoBehaviour
         currentSlowSpeed = 0;
         InSlowTime = false;
     }
-
     private void Die()
     {
         //ADD points
@@ -174,10 +154,7 @@ public class Enemy : MonoBehaviour
         spawn.enemyInGame--;
 
         Destroy(gameObject);
-        //usar essa função quando o pooling de inimigos estiver pronto
-        //gameObject.SetActive(false);
     }
-
     private void ReachThePoint()
     {
         //Debug.Log("");
@@ -190,8 +167,6 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-    //retorna o transform que o inimigo tem que olhar
     private Transform LookPoint()
     {
         if (wayPoints.Length != currentWayPointIndex)
@@ -200,17 +175,9 @@ public class Enemy : MonoBehaviour
         }
         return null;
     }
-
-    //Faz Objeto olhar para o próximo ponto
-    private void UpdateLookAt()
-    {
-        meshEnemyRotation.LookAt(LookPoint());
-    }
-
     private void UpdateHealthBar(int maxHealth,float currentHealth)
     {
         _foreground.fillAmount = currentHealth / maxHealth;
     }
-
     #endregion
 }

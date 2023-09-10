@@ -137,7 +137,7 @@ MonoBehaviour:
   RangeFire: 3.17
   fireRate: 10
   updateTargetTime: 0.8
-  damageInBullet: 100
+  damageInBullet: 5
   partRotate: {fileID: 2997847602456683502}
   meshTurrentTrans: {fileID: 8806584177344803459}
 --- !u!114 &-5414630975036505618

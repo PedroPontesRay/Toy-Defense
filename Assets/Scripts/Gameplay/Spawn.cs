@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.Events;
 
 public class Spawn : MonoBehaviour
 {
@@ -42,6 +40,7 @@ public class Spawn : MonoBehaviour
 
 
     private Interface_Manager interface_functions;
+    private Action<bool> m_HasEnemy;
 
     private void Start()
     {
@@ -61,38 +60,28 @@ public class Spawn : MonoBehaviour
             yield return new WaitForSeconds(tempoEntreWaves);
 
             atualNumeroInimigos = contagemInimigos + (currentWave - 1) * aumentoPorOnda;
-            enemyCurrentMesh =  atualNumeroInimigos;
+            enemyCurrentMesh =  atualNumeroInimigos + 1;
 
             
             atualVelocidadeInimigo = (prefabEnemy.GetComponent<Enemy>().currentSpeed + currentWave) * inimigoAumentoVelocidade;
             atualVidaInimigo = (prefabEnemy.GetComponent<Enemy>().maxLife + currentWave) * inimigoAumentoVida;
             atualValorBricks = (prefabEnemy.GetComponent<Enemy>().valueBricks + currentWave) * aumentoValorBricks;
-
-
             
             for (int i = 0;i < atualNumeroInimigos;i++)
             {
-                /*bool teste = false;
-
-                passOnWaypoint = EnemySpawn().GetComponent<Enemy>().PassOnPoint(true);
-
-                yield return new WaitUntil(() => passOnWaypoint(true))*/
-                yield return new WaitForSeconds(1.0f);
-
-                enemyInGame++;
-
+                enemyCurrentMesh--;
                 EnemySpawn();
+                
+                yield return new WaitUntil(EnemySpawn().GetComponent<Enemy>().PassOnPoint);
+                enemyInGame++;
             }
 
-            
-
-            while(enemyInGame != 0)
+            while(HasEnemy())
             {
                 yield return null;
             }
 
-
-            
+            //yield return new WaitUntil(HasEnemyFunc);
             currentWave++;
 
             interface_functions.UpdateWave(currentWave);
@@ -100,17 +89,31 @@ public class Spawn : MonoBehaviour
 
     }
 
-    private void EnemySpawn()
+
+    public bool HasEnemy()
+    {
+        GameObject[] enemiesInScene= GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject enemy in enemiesInScene)
+        {
+            if(enemy != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private GameObject EnemySpawn()
     {
         GameObject enemyWhoGonnaSpawn = Instantiate(prefabEnemy, spawnPosition.transform.position, Quaternion.identity);
-
         //Definindo variaveis da Onda Atual nos inimigos
         enemyWhoGonnaSpawn.GetComponent<Enemy>().currentMesh = TrainChoose();
         enemyWhoGonnaSpawn.GetComponent<Enemy>().currentSpeed = atualVelocidadeInimigo;
         enemyWhoGonnaSpawn.GetComponent<Enemy>().maxLife = atualVidaInimigo;
         enemyWhoGonnaSpawn.GetComponent<Enemy>().valueBricks = atualValorBricks;
 
-        enemyCurrentMesh--;
+        return enemyWhoGonnaSpawn;
     }
 
     public Mesh TrainChoose()
@@ -127,6 +130,7 @@ public class Spawn : MonoBehaviour
         {
             return secondTrainMesh;
         }
+        
         return null;
     }
 

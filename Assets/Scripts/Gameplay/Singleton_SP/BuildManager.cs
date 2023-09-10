@@ -1,12 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
+    #region Variables
     public static BuildManager instance;
 
+    [NonSerialized]public GameObject turrentToBuild;
+    #endregion
+
+    #region Methods
     void Awake()
     {
         if (instance != null)
@@ -16,14 +19,6 @@ public class BuildManager : MonoBehaviour
         }
         instance = this;
     }
-
-    //towers
-    public GameObject standartTurrentPrefab;
-    public GameObject misselTurrentPrefab;
-    public GameObject soldierTurrentPrefab;
-
-    [NonSerialized]public GameObject turrentToBuild;
-
     public GameObject GetTurrentToBuild()
     {
         return turrentToBuild;
@@ -33,4 +28,5 @@ public class BuildManager : MonoBehaviour
     {
         turrentToBuild = currentSelectTurrent;
     }
+    #endregion
 }

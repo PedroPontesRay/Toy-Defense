@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
         else if (currentTypeShoot == shootType.MISSEL)
         {
             speedProjectile = 2f;
-            timeToDestroy = 2f;
+            timeToDestroy = 5f;
         }
         else if (currentTypeShoot == shootType.GUMBAL)
         {
@@ -49,8 +49,6 @@ public class Bullet : MonoBehaviour
         Invoke("Deactivate",timeToDestroy);
     }
 
-
-
     public void Update()
     {
         MoveProject(currentTypeShoot);
@@ -60,10 +58,9 @@ public class Bullet : MonoBehaviour
     {
         if (target == null)
         {
-            Deactivate();
+            gameObject.SetActive(false);
             return;
         }
-
         if (currentType == shootType.GUMBAL)
         {
             transform.position += transform.forward * (Time.deltaTime * speedProjectile);
@@ -89,9 +86,21 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Enemy enemyIns = other.GetComponent<Enemy>();
+
             enemyIns.TakeDamage(currentDamage);
+
             if(currentTypeShoot == shootType.ICESHOOT)
-            { enemyIns.SlowStateFunc(currentSpeedTime,currentSlowSpeed);}
+            {
+
+                GameObject[] enemyINGAME = GameObject.FindGameObjectsWithTag("Enemy"); 
+
+                for(int i = 0; i < enemyINGAME.Length;i++)
+                {
+                    enemyINGAME[i].GetComponent<Enemy>().SlowStateFunc(currentSpeedTime, currentSlowSpeed);
+                }
+
+            }
+
             Deactivate();
         }
 
