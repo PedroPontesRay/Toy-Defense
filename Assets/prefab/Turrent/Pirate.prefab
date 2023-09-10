@@ -72,8 +72,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2997847602132156402}
-  - component: {fileID: 3130800923228152801}
-  - component: {fileID: 1823621234481957996}
+  - component: {fileID: 2997847602132156413}
+  - component: {fileID: 3086029526059809653}
   m_Layer: 0
   m_Name: Pirate
   m_TagString: Untagged
@@ -98,8 +98,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3130800923228152801
-SphereCollider:
+--- !u!65 &2997847602132156413
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -113,13 +113,13 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 4.66
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1823621234481957996
+  m_Size: {x: 0.9999999, y: 1.6659347, z: 0.9999999}
+  m_Center: {x: 0, y: 0.3329678, z: 0}
+--- !u!114 &3086029526059809653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,10 +128,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2997847602132156415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53b088c3268f4814d940ec1d9e7e0450, type: 3}
+  m_Script: {fileID: 11500000, guid: f72ceb8fddfdd9b41bdce3333e569659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeFire: 1
+  currentTypeTurrent: 5
+  firePoint: {fileID: 2997847601364565484}
+  RangeFire: 4.85
+  fireRate: 1
+  updateTargetTime: 1
+  damageInBullet: 2
+  partRotate: {fileID: 2997847602456683502}
+  meshTurrentTrans: {fileID: 8806584177344803459}
 --- !u!1 &2997847602456683502
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +182,7 @@ GameObject:
   - component: {fileID: 4093953876395663355}
   - component: {fileID: 4119537502308047690}
   - component: {fileID: 774375785328340551}
+  - component: {fileID: 7073555100928288039}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -247,3 +255,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &7073555100928288039
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3221934227156938799}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
