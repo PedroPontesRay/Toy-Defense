@@ -24,7 +24,7 @@ public class Turrent : MonoBehaviour
     [SerializeField] private float fireRate;
     [SerializeField] private float updateTargetTime;
     private float fireCountDown = 0f;
-    public int damageInBullet;
+    public float damageInBullet;
 
     [Header("Rotate-Mesh")]
     public GameObject partRotate;
@@ -93,7 +93,7 @@ public class Turrent : MonoBehaviour
         //add todos os inimigos da area em um array
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemytag);
 
-        int highLife = int.MaxValue;
+        float highLife = float.MaxValue;
 
         GameObject enemyWithHighHealth = null;
         float enemyDistance = 0;
@@ -101,7 +101,7 @@ public class Turrent : MonoBehaviour
         //verifica a posição dos mesmos
         foreach (GameObject enemy in enemies)
         {
-            int enemylife = enemy.GetComponent<Enemy>().currentLife;
+            float enemylife = enemy.GetComponent<Enemy>().currentLife;
 
             if (enemylife < highLife)
             {

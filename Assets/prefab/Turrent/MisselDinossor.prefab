@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTypeTurrent: 2
   firePoint: {fileID: 2997847601364565484}
-  RangeFire: 3.07
+  rangeFire: 10
   fireRate: 1
   updateTargetTime: 1
   damageInBullet: 1000

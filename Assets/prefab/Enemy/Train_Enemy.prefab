@@ -469,8 +469,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLife: 10
   currentSpeed: 1
-  valueBricks: 20
+  valueBricks: 1
   damageInCastle: 20
   _foreground: {fileID: 1284744065244526661}
+  currentLifeAcess: 0
   meshEnemyRotation: {fileID: 1237502353624838627}
   objectMesh: {fileID: 1618121706259476059}

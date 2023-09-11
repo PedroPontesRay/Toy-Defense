@@ -40,7 +40,6 @@ public class Spawn : MonoBehaviour
 
 
     private Interface_Manager interface_functions;
-    private Action<bool> m_HasEnemy;
 
     private void Start()
     {
@@ -73,9 +72,9 @@ public class Spawn : MonoBehaviour
                 EnemySpawn();
                 
                 yield return new WaitUntil(EnemySpawn().GetComponent<Enemy>().PassOnPoint);
-                enemyInGame++;
             }
 
+            //TO DO: MELHORAR A VERIFICAÇÃO
             while(HasEnemy())
             {
                 yield return null;

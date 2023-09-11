@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     private float speedProjectile;
     private float timeToDestroy;
     [NonSerialized] public Transform target;
-    [NonSerialized] public int currentDamage;
+    [NonSerialized] public float currentDamage;
 
     //Slow
     private float currentSlowSpeed;
@@ -34,8 +34,8 @@ public class Bullet : MonoBehaviour
         }
         else if (currentTypeShoot == shootType.MISSEL)
         {
-            speedProjectile = 2f;
-            timeToDestroy = 5f;
+            speedProjectile = 5f;
+            timeToDestroy = 10f;
         }
         else if (currentTypeShoot == shootType.GUMBAL)
         {
@@ -80,21 +80,22 @@ public class Bullet : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (other.CompareTag("Enemy"))
+        if (collision.gameObject.tag == "Enemy")
         {
-            Enemy enemyIns = other.GetComponent<Enemy>();
+
+            
+            Enemy enemyIns = collision.GetComponent<Enemy>();
 
             enemyIns.TakeDamage(currentDamage);
 
-            if(currentTypeShoot == shootType.ICESHOOT)
+            if (currentTypeShoot == shootType.ICESHOOT)
             {
 
-                GameObject[] enemyINGAME = GameObject.FindGameObjectsWithTag("Enemy"); 
+                GameObject[] enemyINGAME = GameObject.FindGameObjectsWithTag("Enemy");
 
-                for(int i = 0; i < enemyINGAME.Length;i++)
+                for (int i = 0; i < enemyINGAME.Length; i++)
                 {
                     enemyINGAME[i].GetComponent<Enemy>().SlowStateFunc(currentSpeedTime, currentSlowSpeed);
                 }

@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Objetos a referenciar")]
     [SerializeField] private Image _foreground;
-    [NonSerialized]  public int currentLife;
+    [SerializeField] public float currentLife;
     //Mesh
     [SerializeField] private Transform meshEnemyRotation;
     public GameObject objectMesh;
@@ -116,12 +116,24 @@ public class Enemy : MonoBehaviour
         }
         return false;
     }
-    public void TakeDamage(int damageInBulllet)
+    public void TakeDamage(float damageInBulllet)
     {
-        currentLife =- damageInBulllet;
+        currentLife -= damageInBulllet;
         UpdateHealthBar(maxLife, currentLife);
-        if(currentLife <= 0)
-        Die();
+
+
+        if (currentLife <= 0)
+        {
+            Die();
+        }
+    }
+    private void Die()
+    {
+        //ADD points
+        interfaceManager.EnemyDied(valueBricks);
+
+
+        gameObject.SetActive(false);
     }
     public void SlowStateFunc(float time, float speed)
     {
@@ -146,14 +158,6 @@ public class Enemy : MonoBehaviour
         //estado quando acaba
         currentSlowSpeed = 0;
         InSlowTime = false;
-    }
-    private void Die()
-    {
-        //ADD points
-        interfaceManager.EnemyDied(valueBricks);
-        spawn.enemyInGame--;
-
-        Destroy(gameObject);
     }
     private void ReachThePoint()
     {

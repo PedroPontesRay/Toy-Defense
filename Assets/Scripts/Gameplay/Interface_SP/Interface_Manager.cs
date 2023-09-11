@@ -30,7 +30,7 @@ public class Interface_Manager : MonoBehaviour
 
     public void EnemyDied(int valueBrick)
     {
-        MainScript.brickQnt += (valueBrick / 2);
+        MainScript.brickQnt += valueBrick;
         brickNumberTXT.text = MainScript.brickQnt.ToString();
     }
 

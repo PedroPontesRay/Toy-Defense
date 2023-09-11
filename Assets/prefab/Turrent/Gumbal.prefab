@@ -134,10 +134,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTypeTurrent: 1
   firePoint: {fileID: 2997847601364565484}
-  RangeFire: 3.17
+  rangeFire: 10
   fireRate: 10
   updateTargetTime: 0.8
-  damageInBullet: 5
+  damageInBullet: 10
   partRotate: {fileID: 2997847602456683502}
   meshTurrentTrans: {fileID: 8806584177344803459}
 --- !u!114 &-5414630975036505618
