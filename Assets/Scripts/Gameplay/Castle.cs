@@ -11,6 +11,7 @@ public class Castle : MonoBehaviour
     [SerializeField] private int maxLife;
     [NonSerialized]  public float currentLife;
     [SerializeField] private Image _foreground;
+    private Interface_Manager _manager;
 
     #endregion
 
@@ -19,6 +20,7 @@ public class Castle : MonoBehaviour
 
     private void Start()
     {
+        _manager = FindAnyObjectByType<Interface_Manager>();
         currentLife = maxLife;
     }
 
@@ -28,6 +30,11 @@ public class Castle : MonoBehaviour
         currentLife -= damageByTheEnemy;
 
         UpdateLife(maxLife,currentLife);
+
+        if(currentLife <= 0)
+        {
+
+        }
     }
 
     private void UpdateLife(int maxHealth,float currentHealth)
