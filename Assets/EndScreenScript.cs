@@ -17,7 +17,12 @@ public class EndScreenScript : MonoBehaviour
 
     [Header("Names")]
     private string[] names;//TO.DO aplicar playfab
-    public TextMeshProUGUI[] _txtComponents; 
+    public TextMeshProUGUI[] _txtComponents;
+
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
 
 
 
@@ -31,8 +36,4 @@ public class EndScreenScript : MonoBehaviour
 
         gameObject.SetActive(true);
     }
-
-
-
-
 }

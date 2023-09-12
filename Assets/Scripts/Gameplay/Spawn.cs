@@ -50,7 +50,7 @@ public class Spawn : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
-    private IEnumerator SpawnEnemies()
+    public IEnumerator SpawnEnemies()
     {
         while (true)
         {

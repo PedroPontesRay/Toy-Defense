@@ -13,19 +13,25 @@ public class Interface_Manager : MonoBehaviour
     public EndScreenScript _endScreen;
 
     public static Interface_Manager instanceInterface;
+    public Spawn _spawnScript;
+
+    private int TEST;
 
 
 
     private void Awake()
     {
-        _endScreen= FindAnyObjectByType<EndScreenScript>();
+        TEST= 1;
         instanceInterface = this; 
         pauseMenu.SetActive(false);
-        EndGame();
+        _spawnScript = FindAnyObjectByType<Spawn>();    
+
 
 
         Screen.SetResolution(480, 680, true);
     }
+
+
     //Funcao para atualizar a wave
     public void UpdateWave(int waveCurrent)
     {
@@ -46,6 +52,7 @@ public class Interface_Manager : MonoBehaviour
     }
     public void EndGame()
     {
-        //_endScreen.Open(TEST,TEST,TEST,TEST);
+        _endScreen.Open(TEST,TEST,TEST,TEST);
+        _spawnScript.StopCoroutine(_spawnScript.SpawnEnemies());
     }
 }

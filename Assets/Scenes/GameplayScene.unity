@@ -3852,7 +3852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &950178296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8443,6 +8443,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1024864271}
     - target: {fileID: 1405838781305009099, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
+      propertyPath: _endScreen
+      value: 
+      objectReference: {fileID: 950178300}
+    - target: {fileID: 1405838781305009099, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
       propertyPath: gameplayMenu
       value: 
       objectReference: {fileID: 902215197}
@@ -8515,8 +8519,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 635987991}
     - target: {fileID: 8536642079301464643, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
-      propertyPath: contagemInimigos
+      propertyPath: aumentoPorOnda
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536642079301464643, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
+      propertyPath: contagemInimigos
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8536642079301464643, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
       propertyPath: inimigoAumentoVida
@@ -8524,7 +8532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8536642079301464643, guid: 6315d2a131af65f46ac204a0ba5b9794, type: 3}
       propertyPath: inimigoAumentoVelocidade
-      value: 0.3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

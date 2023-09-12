@@ -31,9 +31,9 @@ public class Castle : MonoBehaviour
 
         UpdateLife(maxLife,currentLife);
 
-        if(currentLife <= 0)
+        if(currentLife == 0)
         {
-
+            _manager.EndGame();
         }
     }
 
